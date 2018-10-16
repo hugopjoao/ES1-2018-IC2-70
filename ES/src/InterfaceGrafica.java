@@ -60,6 +60,7 @@ public class InterfaceGrafica extends JFrame {
         InterfaceGrafica gui = new InterfaceGrafica();
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gui.setVisible(true);
+        System.out.println("teste");
          
     }
     
