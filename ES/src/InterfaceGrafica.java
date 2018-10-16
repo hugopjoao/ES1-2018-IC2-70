@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
  
+
 public class InterfaceGrafica extends JFrame {
 	
 	private static int maxW = 400;
@@ -60,7 +61,6 @@ public class InterfaceGrafica extends JFrame {
         InterfaceGrafica gui = new InterfaceGrafica();
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gui.setVisible(true);
-        System.out.println("teste");
          
     }
     
