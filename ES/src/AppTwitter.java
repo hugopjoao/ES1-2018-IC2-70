@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import twitter4j.Query;
@@ -38,6 +39,8 @@ public class AppTwitter {
             }
             System.out.println("Showing @" + i + "'s user timeline.");
             for (Status status : statuses) {
+            	Date criacao = status.getCreatedAt();
+            	//criar ciclo para ordenar datas
                 System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
             }
           }
