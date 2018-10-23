@@ -1,19 +1,16 @@
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
-
-import twitter4j.Query;
-import twitter4j.ResponseList;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-public class AppTwitter {
+public class AppTwitter extends Thread {
 	
-	public static void main(String[] args) {
-        // gets Twitter instance with default credentials
+	public void run() {
+        
         Twitter twitter = new TwitterFactory().getInstance();
         try {
             ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -26,24 +23,24 @@ public class AppTwitter {
             Twitter twitter1 = tf.getInstance();
             List<Status> statuses;
             ArrayList<String> listaUsers = new ArrayList<String>();
+            ArrayList<Status> listaStatus = new ArrayList<Status>();            
             listaUsers.add("@ISCTEIUL");
             listaUsers.add("IBSLisbon");
             listaUsers.add("ISTAR_IUL");
-     
+
           for(String i : listaUsers) {
-        	  if (args.length == 1) {
-               
                 statuses = twitter1.getUserTimeline(i);
-            } else {
-                statuses = twitter1.getUserTimeline(i);
+                listaStatus.addAll(statuses);
             }
-            System.out.println("Showing @" + i + "'s user timeline.");
-            for (Status status : statuses) {
-            	Date criacao = status.getCreatedAt();
-            	//criar ciclo para ordenar datas
-                System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
-            }
-          }
+          Collections.sort(listaStatus);
+          Collections.reverse(listaStatus);
+          String texto = new String();
+            for (Status status : listaStatus) {
+            	
+            	texto = concatenar(texto,"@" + status.getUser().getScreenName() + " - " + status.getText()+ "\n\n\n" + status.getCreatedAt() + "\n\n\n");
+            }  
+            System.out.println(texto);
+            InterfaceGrafica.setTwitter(texto);
             
         } catch (TwitterException te) {
             te.printStackTrace();
@@ -52,6 +49,8 @@ public class AppTwitter {
         }
     }
 	
-	
-	
+	private String concatenar (String inicial, String adicionar) {
+		inicial = inicial +  adicionar ;
+		return inicial;
+	}
 }
