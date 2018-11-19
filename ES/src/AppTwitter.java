@@ -40,7 +40,7 @@ public class AppTwitter extends Thread {
             	texto = concatenar(texto,"@" + status.getUser().getScreenName() + " - " + status.getText()+ "\n\n\n" + status.getCreatedAt() + "\n\n\n");
             }  
             System.out.println(texto);
-            InterfaceGrafica.setTwitter(texto);
+//            InterfaceGrafica.setTwitter(texto);
             
         } catch (TwitterException te) {
             te.printStackTrace();
