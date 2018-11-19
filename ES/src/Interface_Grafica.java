@@ -20,6 +20,10 @@ import javax.swing.JTextPane;
 public class Interface_Grafica {
 
 	private JFrame frame;
+	private JPanel panel_0 = new JPanel();
+	private JPanel panel_1 = new JPanel();
+	private JPanel panel_2 = new JPanel();
+	private JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -42,19 +46,36 @@ public class Interface_Grafica {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
-
-		JPanel panel_0 = new JPanel();
-		JPanel panel_1 = new JPanel();
-		JPanel panel_2 = new JPanel();
 		ImageIcon twitter = new ImageIcon(this.getClass().getResource("twitter.jpg"));
 		twitter.setImage(getScaledImage(twitter.getImage(), 10, 10));
 		ImageIcon facebook = new ImageIcon(this.getClass().getResource("facebook.png"));
 		facebook.setImage(getScaledImage(facebook.getImage(), 10, 10));
 		ImageIcon mailImagem = new ImageIcon(this.getClass().getResource("mail.png"));
 		mailImagem.setImage(getScaledImage(mailImagem.getImage(), 10, 10));
+		tabbedPane.addTab("Twitter", twitter, panel_0);
+		tabbedPane.addTab("Facebook", facebook, panel_1);
+		tabbedPane.addTab("E-Mail", mailImagem, panel_2);
+//		iniciaTwitter();
+//		iniciaFace();
+//		iniciaMail();
+//		
+//		
+//		
+//		
+//		
+//		POR BOTOES PARA LOG IN
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+	}
+
+	private void iniciaTwitter() {
 
 		JList<String> listaTweets = new JList<String>();
 
@@ -90,7 +111,9 @@ public class Interface_Grafica {
 				.addGap(286)));
 		panel_0.setLayout(gl_panel);
 
-		tabbedPane.addTab("Twitter", twitter, panel_0);
+	}
+
+	private void iniciaFace() {
 
 		JList<String> listaPosts = new JList<String>();
 
@@ -126,7 +149,9 @@ public class Interface_Grafica {
 				.addGap(286)));
 		panel_1.setLayout(g2_panel);
 
-		tabbedPane.addTab("Facebook", facebook, panel_1);
+	}
+
+	private void iniciaMail() {
 
 		JList<String> listaMails = new JList<String>();
 
@@ -161,8 +186,6 @@ public class Interface_Grafica {
 						.addComponent(listaMails, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE))
 				.addGap(286)));
 		panel_2.setLayout(g3_panel);
-
-		tabbedPane.addTab("E-Mail", mailImagem, panel_2);
 
 	}
 
