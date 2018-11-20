@@ -26,8 +26,17 @@ public class AppTwitter extends Thread {
 		this.consumerSecret = consumerSecret;
 		this.accessToken = accessToken;
 		this.tokenSecret = tokenSecret;
+		
+//		this.consumerKey = "EpysCbFJ3KN0X7qoDk5llztD8";
+//		this.consumerSecret = "XlVwrmtx9JeQucykuukThiC4nYZa34L4jQJuUwLP4bgXjAnlEu";
+//		this.accessToken = "832318636555636737-GxsN6MvuUKHqF8N0hxzmO2w1EpWx4HA";
+//		this.tokenSecret = "yCbc6VKR1K7TYIjDiidVrlbyUkNX2tNo2QveVKr7ol8WB";
+		
+		
 		this.gui = gui;
 		this.accessGranted = true;
+		
+		
 	}
 
 	public void run() {
@@ -111,11 +120,6 @@ public class AppTwitter extends Thread {
 
 	public void setAccess() {
 		this.accessGranted = true;
-	}
-
-	private String concatenar(String inicial, String adicionar) {
-		inicial = inicial + adicionar;
-		return inicial;
 	}
 
 	public boolean getValidation() {
