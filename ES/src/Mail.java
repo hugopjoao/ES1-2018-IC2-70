@@ -27,14 +27,21 @@ public class Mail {
 	private String server;
 	private Properties connectionProperties;
 
-	public Mail(String username, String password, Interface_Grafica gui) {
-		 this.username = username;
-		 this.password = password;
+	/**
+	 * construtor para o mail com username e respetiva password. inicialização da
+	 * gui.
+	 */
 
-		
+	public Mail(String username, String password, Interface_Grafica gui) {
+		this.username = username;
+		this.password = password;
 
 		this.gui = gui;
 	}
+
+	/**
+	 * termina aplicação
+	 */
 
 	public void fechar() {
 		try {
@@ -80,8 +87,14 @@ public class Mail {
 		}
 	}
 
+	/**
+	 * metódo para responder a um mail. username para quem se responde, origem da mensagem e string texto com 
+	 * texto da mensagem a ser enviada
+	 */
+	
+	
 	@SuppressWarnings("static-access")
-	public void responder(int index) throws MessagingException {
+		public void responder(int index) throws MessagingException {
 		Message mensagem = messages[index];
 		String to = username;
 		String[] origem = mensagem.getFrom()[0].toString().split("<");
@@ -118,6 +131,10 @@ public class Mail {
 	public boolean getValidation() {
 		return true;
 	}
+
+	/**
+	 * imprimir mail. aparece na gui o texto
+	 */
 
 	public void imprimeMail(int index) throws IOException, MessagingException {
 		Message message = messages[index];
