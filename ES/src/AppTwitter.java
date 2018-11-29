@@ -20,6 +20,13 @@ public class AppTwitter extends Thread {
 	public ArrayList<Status> listaStatus = new ArrayList<Status>();
 	private Twitter twitter = new TwitterFactory().getInstance();
 
+	/**
+	 * Construtor da App do Twitter que recebe como argumentos uma Consumer Key,
+	 *  um consumer Secret, um Access Token e um Token Secret, fazendo a associação 
+	 *  a uma dada Interface Gráfica.
+	 */
+
+	
 	public AppTwitter(String consumerKey, String consumerSecret, String accessToken, String tokenSecret,
 			Interface_Grafica gui) {
 		this.consumerKey = consumerKey;
@@ -38,6 +45,14 @@ public class AppTwitter extends Thread {
 		
 		
 	}
+	
+	/**
+	 * Implementação do método run correspondente à Thread AppTwitter que cria o ConfigurationBuilder
+	 * e instancia um novo twitter com os Tokens de acesso recebidos anteriormente. Em seguida cria uma lista de status
+	 * e procura todos os posts de contas relacionadas diretamente com o ISCTE, adiciona à ArrayList de Status, organiza por 
+	 * ordem temporal e imprime na InterfaceGrafica. Caso não consiga acesso com os tokens dados pelo utilizador, apresenta uma
+	 * mensagem de erro, apaga o processo e instancia-se novamente.
+	 */
 
 	public void run() {
 
@@ -75,6 +90,12 @@ public class AppTwitter extends Thread {
 
 	}
 
+	/**
+	 * Implementação do método retweet (utilizado através de um actionListener da Interface Gráfica que
+	 * permite dar retweet do post que está em exibição através da instanciação do método retweetStatus
+	 * da API utilizada (Twitter4j).
+	 */
+	
 	public void retweet(Status s) {
 
 		long tweetId = s.getId();
@@ -94,6 +115,13 @@ public class AppTwitter extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	/**
+	 * Implementação do método fav que recebe um status (o que está apresentado na Gui) e 
+	 * dá Fav (like) no tweet publicado.
+	 */
+	
 
 	public void fav(Status s) {
 		long tweetId = s.getId();
@@ -113,22 +141,45 @@ public class AppTwitter extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Implementação do método enviaTitulos que recebe um Status e envia para a Gui o user que publicou o tweet
+	 * e a data em que foi criado.
+	 */
 
 	private void enviaTitulos(Status status) {
 		gui.modelTwitter.addElement(status.getUser().getScreenName() + " || " + status.getCreatedAt());
 	}
+	
+	/**
+	 * Implementação de um método para altera a variável accessGranted para true com o objetivo de saber se foi autorizado o acesso.
+	 */
 
 	public void setAccess() {
 		this.accessGranted = true;
 	}
 
+	/**
+	 * Implementação de um método para devolver o estado da variável accessGranted.
+	 */
+	
 	public boolean getValidation() {
 		return accessGranted;
 	}
 
+	/**
+	 * Implementação de um método que recebe um indíce sob a forma de um inteiro, e devolve da lista de Status, o status
+	 * correspondente ao índice.
+	 */	
+	
 	public Status getIndex(int index) {
 		return listaStatus.get(index);
 	}
+	
+	/**
+	 * Implementação de um método que recebe um indíce sob a forma de um inteiro, e imprime na Gui o status
+	 * correspondente ao obtido no método getIndex(index).
+	 */	
 
 	public void imprimeIndex(int index) {
 		gui.tweet.setText(getIndex(index).getText());
