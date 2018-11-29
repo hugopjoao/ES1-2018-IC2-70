@@ -1,4 +1,7 @@
+import com.restfb.types.Thread;
 
-public class Facebook {
+public class Facebook extends Thread {
 
+	
+	
 }
