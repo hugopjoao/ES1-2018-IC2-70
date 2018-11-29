@@ -15,7 +15,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.swing.JOptionPane;
 
-public class Mail {
+public class Mail extends Thread{
 
 	private String username;
 	private String password;
