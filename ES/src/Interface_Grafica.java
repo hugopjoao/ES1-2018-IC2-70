@@ -44,6 +44,12 @@ public class Interface_Grafica {
 	private JScrollPane scrollPaneTwitter = new JScrollPane();
 	private int indiceTwitter;
 
+	private Facebook face;
+	JTextPane postAtual = new JTextPane();
+	private JScrollPane scrollPaneFace = new JScrollPane();
+	private JScrollPane scrollPaneFacePost = new JScrollPane();
+	private int indiceFace;
+
 	private Mail mailApp;
 	JTextPane mail = new JTextPane();
 	private JScrollPane scrollPaneMails = new JScrollPane();
@@ -98,17 +104,35 @@ public class Interface_Grafica {
 		});
 		// iniciaFace();
 		//
-		JButton logInMail = new JButton("Log In");
-		GroupLayout g2_panel = new GroupLayout(panel_2);
+		JButton logInFace = new JButton("Log In");
+		GroupLayout g2_panel = new GroupLayout(panel_1);
 		g2_panel.setHorizontalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
 				g2_panel.createSequentialGroup().addContainerGap(156, Short.MAX_VALUE)
-						.addComponent(logInMail, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+						.addComponent(logInFace, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
 						.addGap(144)));
 		g2_panel.setVerticalGroup(g2_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(g2_panel.createSequentialGroup().addGap(97)
+						.addComponent(logInFace, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(101, Short.MAX_VALUE)));
+		panel_1.setLayout(g2_panel);
+
+		logInFace.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botaoLoginFace();
+			}
+		});
+
+		JButton logInMail = new JButton("Log In");
+		GroupLayout g3_panel = new GroupLayout(panel_2);
+		g3_panel.setHorizontalGroup(g3_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
+				g3_panel.createSequentialGroup().addContainerGap(156, Short.MAX_VALUE)
+						.addComponent(logInMail, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+						.addGap(144)));
+		g3_panel.setVerticalGroup(g3_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(g3_panel.createSequentialGroup().addGap(97)
 						.addComponent(logInMail, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(101, Short.MAX_VALUE)));
-		panel_2.setLayout(g2_panel);
+		panel_2.setLayout(g3_panel);
 
 		logInMail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -137,10 +161,18 @@ public class Interface_Grafica {
 		String tokenSecret = JOptionPane.showInputDialog("Please insert your Token Secret");
 		AppTwitter twitter = new AppTwitter(consumerKey, consumerSecret, accessToken, tokenSecret, this);
 		this.twitter = twitter;
-		if (twitter.getValidation()) {
-			twitter.run();
-			iniciaTwitter();
-		}
+		twitter.run();
+		iniciaTwitter();
+
+	}
+
+	public void botaoLoginFace() {
+		String consumerKey = JOptionPane.showInputDialog("Please insert your Consumer Key");
+		Facebook face = new Facebook(this);
+		this.face = face;
+		//face.run();
+		iniciaFace();
+
 	}
 
 	public void botaoLoginMail() {
@@ -155,10 +187,8 @@ public class Interface_Grafica {
 				;
 			}
 		});
-		if (mailApp.getValidation()) {
-			mailApp.run();
-			iniciaMail();
-		}
+		mailApp.run();
+		iniciaMail();
 	}
 
 	private void iniciaTwitter() {

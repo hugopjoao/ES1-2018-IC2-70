@@ -128,10 +128,6 @@ public class Mail extends Thread{
 
 	}
 
-	public boolean getValidation() {
-		return true;
-	}
-
 	/**
 	 * imprimir mail. aparece na gui o texto
 	 */

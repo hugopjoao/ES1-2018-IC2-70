@@ -15,7 +15,6 @@ public class AppTwitter extends Thread {
 	private String accessToken;
 	private String tokenSecret;
 	private Interface_Grafica gui;
-	public boolean accessGranted = false;
 	private ArrayList<String> listaUsers = new ArrayList<String>();
 	public ArrayList<Status> listaStatus = new ArrayList<Status>();
 	private Twitter twitter = new TwitterFactory().getInstance();
@@ -38,11 +37,8 @@ public class AppTwitter extends Thread {
 //		this.consumerSecret = "XlVwrmtx9JeQucykuukThiC4nYZa34L4jQJuUwLP4bgXjAnlEu";
 //		this.accessToken = "832318636555636737-GxsN6MvuUKHqF8N0hxzmO2w1EpWx4HA";
 //		this.tokenSecret = "yCbc6VKR1K7TYIjDiidVrlbyUkNX2tNo2QveVKr7ol8WB";
-		
-		
-		this.gui = gui;
-		this.accessGranted = true;
-		
+			
+		this.gui = gui;		
 		
 	}
 	
@@ -151,21 +147,6 @@ public class AppTwitter extends Thread {
 		gui.modelTwitter.addElement(status.getUser().getScreenName() + " || " + status.getCreatedAt());
 	}
 	
-	/**
-	 * Implementação de um método para altera a variável accessGranted para true com o objetivo de saber se foi autorizado o acesso.
-	 */
-
-	public void setAccess() {
-		this.accessGranted = true;
-	}
-
-	/**
-	 * Implementação de um método para devolver o estado da variável accessGranted.
-	 */
-	
-	public boolean getValidation() {
-		return accessGranted;
-	}
 
 	/**
 	 * Implementação de um método que recebe um indíce sob a forma de um inteiro, e devolve da lista de Status, o status
