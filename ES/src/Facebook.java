@@ -17,7 +17,8 @@ public class Facebook extends Thread {
 		this.gui = gui;
 	}
 	
-	/* Implementação do método run correspondente à Thread do Facebook que instancia um novo facebook com o Access Token recebido
+	/**
+	 *  Implementação do método run correspondente à Thread do Facebook que instancia um novo facebook com o Access Token recebido
 	 * anteriormente. Em seguida criará uma lista com os posts do utilizador para que depois possa filtrar por posts relacionados com o ISCTE.
 	 * Nesta filtragem, adiciona os posts relacionados com o ISCTE numa ArrayList, será organizado por ordem cronológica e impressa na GUI.
 	 * Caso não seja possível obter acesso com o Token utilizado, apresentará uma mensagem de erro.
