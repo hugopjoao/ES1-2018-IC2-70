@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.lang.model.element.VariableElement;
 import javax.swing.JOptionPane;
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -62,7 +64,7 @@ public class AppTwitter extends Thread {
 			TwitterFactory tf = new TwitterFactory(cb.build());
 			Twitter twitter1 = tf.getInstance();
 			List<Status> statuses;
-
+			
 			listaUsers.add("@ISCTEIUL");
 			listaUsers.add("IBSLisbon");
 			listaUsers.add("ISTAR_IUL");

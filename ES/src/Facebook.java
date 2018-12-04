@@ -3,6 +3,7 @@ import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
@@ -12,7 +13,7 @@ import com.restfb.types.Post;
 import com.restfb.types.Thread;
 import com.restfb.types.User;
 
-public class Facebook extends Thread {
+public class Facebook extends Thread{
 
 	private Interface_Grafica gui;
 	private String accessToken;
@@ -59,8 +60,13 @@ public class Facebook extends Thread {
 		    listaPosts.addAll(pagePosts2);
 		    listaPosts.addAll(pagePosts3);
 		    
-		    Collections.sort(listaPosts);
-		    Collections.reverse(listaPosts);
+		    // listaPosts.sort(c); 
+		    Collections.sort(listaPosts, new CustomComparator());
+		    Collections.reverse(listaPosts); 
+		    
+		    for (Post post : listaPosts) {
+		    	
+		    }
 	}
 	
 	
@@ -71,5 +77,6 @@ public class Facebook extends Thread {
 	public void partilhar() {
 		
 	}
+	
 	
 }
