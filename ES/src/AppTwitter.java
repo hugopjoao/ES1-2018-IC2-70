@@ -28,15 +28,15 @@ public class AppTwitter extends Thread {
 	
 	public AppTwitter(String consumerKey, String consumerSecret, String accessToken, String tokenSecret,
 			Interface_Grafica gui) {
-		this.consumerKey = consumerKey;
-		this.consumerSecret = consumerSecret;
-		this.accessToken = accessToken;
-		this.tokenSecret = tokenSecret;
+//		this.consumerKey = consumerKey;
+//		this.consumerSecret = consumerSecret;
+//		this.accessToken = accessToken;
+//		this.tokenSecret = tokenSecret;
 		
-//		this.consumerKey = "EpysCbFJ3KN0X7qoDk5llztD8";
-//		this.consumerSecret = "XlVwrmtx9JeQucykuukThiC4nYZa34L4jQJuUwLP4bgXjAnlEu";
-//		this.accessToken = "832318636555636737-GxsN6MvuUKHqF8N0hxzmO2w1EpWx4HA";
-//		this.tokenSecret = "yCbc6VKR1K7TYIjDiidVrlbyUkNX2tNo2QveVKr7ol8WB";
+		this.consumerKey = "EpysCbFJ3KN0X7qoDk5llztD8";
+		this.consumerSecret = "XlVwrmtx9JeQucykuukThiC4nYZa34L4jQJuUwLP4bgXjAnlEu";
+		this.accessToken = "832318636555636737-GxsN6MvuUKHqF8N0hxzmO2w1EpWx4HA";
+		this.tokenSecret = "yCbc6VKR1K7TYIjDiidVrlbyUkNX2tNo2QveVKr7ol8WB";
 			
 		this.gui = gui;		
 		

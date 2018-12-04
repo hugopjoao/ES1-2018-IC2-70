@@ -167,8 +167,8 @@ public class Interface_Grafica {
 	}
 
 	public void botaoLoginFace() {
-		String consumerKey = JOptionPane.showInputDialog("Please insert your Consumer Key");
-		Facebook face = new Facebook(this);
+		String accessToken = JOptionPane.showInputDialog("Please insert your Access Token");
+		Facebook face = new Facebook(accessToken, this);
 		this.face = face;
 		//face.run();
 		iniciaFace();

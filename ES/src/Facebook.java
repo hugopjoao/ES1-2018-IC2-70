@@ -1,13 +1,16 @@
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
 import com.restfb.types.Thread;
+import com.restfb.types.User;
 
 public class Facebook extends Thread {
 
 	private Interface_Grafica gui;
 	private String accessToken;
-	
+	private FacebookClient facebookClient;
 	
 	/* Access token:
-	 EAAMZCl2Ln2ZAkBABIv1qIFGFXd93JrHkt9Qpwhlsx2MZA4UcIw2OJMOtqRSGMqluWdqvdgwfNEeTdnnb82tcqeh7Ns3WlKF1aHZBNEmoJv9zhfIdG97hTROZBhVGgnAl5z3JnvHZAjy14m79Iu9CYqwlOwktBAd6j394w5ISnJdtpSiqQZCfKWbYn1YjvAjZBNzWXeEoDFmMNYrzMyUQFxgWxlSPZCLth204qhKyrzVfjygZDZD */
+	 EAAMZCl2Ln2ZAkBAG7R2cqKbcuNtedERPNUpLZCczaQtFxZB6E4dZAnMZAP4xB7ZBBwWxdAgmAbfZCGGWk5F4PRDZAFSI9ZCpbGCqbjCtI1hKLnItg0CQkR6cqxvEyo0c2Olv1w6X8DQjZAdZAMfjxZB6AWxQiQ4EARmon12NA4Es9iq4sMzOxla05nqDw33Hote0OyP08dJsWfJyy9Ohye2HM1ZBo3fchnpEsmH8irTxEYKAfLAQlK2TAUsEyF */
 	
 	public Facebook (String accessToken, Interface_Grafica gui) {
 		this.accessToken = accessToken;
@@ -22,6 +25,9 @@ public class Facebook extends Thread {
 	
 	public void run () {
 		
+		 facebookClient = new DefaultFacebookClient(accessToken);
+		    User user = facebookClient.fetchObject("me", User.class); 
+		    System.out.println("User name: " + user.getName()); 		
 	}
 	
 	
@@ -29,7 +35,7 @@ public class Facebook extends Thread {
 		
 	}
 	
-	public void comentar() {
+	public void partilhar() {
 		
 	}
 	
