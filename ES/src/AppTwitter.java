@@ -44,6 +44,7 @@ public class AppTwitter extends Thread {
 		
 	}
 	
+	
 	/**
 	 * Implementação do método run correspondente à Thread AppTwitter que cria o ConfigurationBuilder
 	 * e instancia um novo twitter com os Tokens de acesso recebidos anteriormente. Em seguida cria uma lista de status
