@@ -25,4 +25,12 @@ public class Facebook extends Thread {
 	}
 	
 	
+	public void Like () {
+		
+	}
+	
+	public void comentar() {
+		
+	}
+	
 }
