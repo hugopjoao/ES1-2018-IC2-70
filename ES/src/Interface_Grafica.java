@@ -33,9 +33,10 @@ public class Interface_Grafica {
 	private JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	public DefaultListModel<String> modelTwitter = new DefaultListModel<>();
 	public DefaultListModel<String> modelMail = new DefaultListModel<>();
+	public DefaultListModel<String> modelFacebook = new DefaultListModel<>();
 
 	public JList<String> listaTweets = new JList<String>(modelTwitter);
-	public JList<String> listaPosts = new JList<String>();
+	public JList<String> listaPosts = new JList<String>(modelFacebook);
 	public JList<String> listaMails = new JList<String>(modelMail);
 
 	private AppTwitter twitter;

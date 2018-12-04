@@ -66,7 +66,7 @@ public class Facebook extends Thread{
 		    Collections.reverse(listaPosts); 
 		    
 		    for (Post post : listaPosts) {
-		    	
+		    	enviaPosts(post);
 		    }
 	}
 	
@@ -85,9 +85,12 @@ public class Facebook extends Thread{
 		String postId = p.getId();
 		
 		DefaultFacebookClient client = new DefaultFacebookClient(accessToken);
-		client.publish("me/feed", FacebookType.class, Parameter.with("link", "https://www.facebook.com/10152237769155733"));
+		client.publish("me/feed", FacebookType.class, Parameter.with("link", postId));
 		
 	}
 	
+	private void enviaPosts(Post p) {
+		gui.modelFacebook.addElement(p.getName() + " || " + p.getCreatedTime());
+	}
 	
 }
