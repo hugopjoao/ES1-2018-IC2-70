@@ -9,6 +9,7 @@ import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
+import com.restfb.types.FacebookType;
 import com.restfb.types.Post;
 import com.restfb.types.Thread;
 import com.restfb.types.User;
@@ -16,7 +17,7 @@ import com.restfb.types.User;
 public class Facebook extends Thread{
 
 	private Interface_Grafica gui;
-	private String accessToken;
+	private String accessToken = "EAAMZCl2Ln2ZAkBAG7R2cqKbcuNtedERPNUpLZCczaQtFxZB6E4dZAnMZAP4xB7ZBBwWxdAgmAbfZCGGWk5F4PRDZAFSI9ZCpbGCqbjCtI1hKLnItg0CQkR6cqxvEyo0c2Olv1w6X8DQjZAdZAMfjxZB6AWxQiQ4EARmon12NA4Es9iq4sMzOxla05nqDw33Hote0OyP08dJsWfJyy9Ohye2HM1ZBo3fchnpEsmH8irTxEYKAfLAQlK2TAUsEyF";
 	private FacebookClient facebookClient;
 	public ArrayList <Post> listaPosts = new ArrayList <Post>();
 	
@@ -70,11 +71,21 @@ public class Facebook extends Thread{
 	}
 	
 	
-	public void Like () {
+	public void like (Post p) {
+		
+		String postId = p.getId();
+		
+		DefaultFacebookClient client = new DefaultFacebookClient(accessToken);
+		client.publish(postId+"/likes", Boolean.class); 
 		
 	}
 	
-	public void partilhar() {
+	public void partilhar(Post p) {
+		
+		String postId = p.getId();
+		
+		DefaultFacebookClient client = new DefaultFacebookClient(accessToken);
+		client.publish("me/feed", FacebookType.class, Parameter.with("link", "https://www.facebook.com/10152237769155733"));
 		
 	}
 	
