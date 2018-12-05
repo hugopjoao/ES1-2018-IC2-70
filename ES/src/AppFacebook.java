@@ -13,12 +13,12 @@ import facebook4j.conf.ConfigurationBuilder;
 public class AppFacebook extends Thread{
 
 	private Interface_Grafica gui;
-	private String accessToken = "EAAMZCl2Ln2ZAkBACjFPMwoMN9zPqZAjiEx6ZChZCWDAWj56zJjXJTq15DkcLZBZCCGXpvb2Ih79VWZB4Vdk0jwQ7vvEVPsYbimEcgJC5x8tU3hU7i4DL1ET2e0pNuZCuFsYYy8ESf6FGanwMJbxkzC0bQdgrUNA4VSHW0JZAqLyTOawHZAGFNkc7BhSBZC5cHF8m3iInOQeCrr20Ka5GmsJSZBOSy7SbnVZCxXpLwmJ3ok9tuxuZBDGEPydKWEI";
+	private String accessToken = "EAAMZCl2Ln2ZAkBAEof3X5g9YRoFpt6LpJqCW6fGITYFoHZCSz2MDbmaFtlFbMwkohrg0LZCkwrepdCA8ZAh20pYZBtYqCZAtrwr03ZCQeNZClgxmnUJewarsFBSjWPEKr13nUc2J9KJUZAQZB6CzIXFJeal3lFnzrorowCCtAixAS5M0wDZBvwDuyHTVlEJ2vcldzyoXCAG1ZBZCvX5rjrMEFtl35Phm5r9XUmL7wajRXSncBeTidvTCKW6rMA";
 	private Facebook facebook;
 	public ArrayList <Post> listaPosts = new ArrayList <Post>();
 	
 	/* Access token:
-	 EAAMZCl2Ln2ZAkBACjFPMwoMN9zPqZAjiEx6ZChZCWDAWj56zJjXJTq15DkcLZBZCCGXpvb2Ih79VWZB4Vdk0jwQ7vvEVPsYbimEcgJC5x8tU3hU7i4DL1ET2e0pNuZCuFsYYy8ESf6FGanwMJbxkzC0bQdgrUNA4VSHW0JZAqLyTOawHZAGFNkc7BhSBZC5cHF8m3iInOQeCrr20Ka5GmsJSZBOSy7SbnVZCxXpLwmJ3ok9tuxuZBDGEPydKWEI */
+	 EAAMZCl2Ln2ZAkBAEof3X5g9YRoFpt6LpJqCW6fGITYFoHZCSz2MDbmaFtlFbMwkohrg0LZCkwrepdCA8ZAh20pYZBtYqCZAtrwr03ZCQeNZClgxmnUJewarsFBSjWPEKr13nUc2J9KJUZAQZB6CzIXFJeal3lFnzrorowCCtAixAS5M0wDZBvwDuyHTVlEJ2vcldzyoXCAG1ZBZCvX5rjrMEFtl35Phm5r9XUmL7wajRXSncBeTidvTCKW6rMA */
 	
 	/* https://www.facebook.com/Istar-Iul-1008842092466001/ 
 	 * https://www.facebook.com/ISCTEIUL/?ref=br_rs
@@ -55,7 +55,7 @@ public class AppFacebook extends Thread{
 		listaPosts.removeAll(listaPosts);
 		
 		try {
-			listaPosts.addAll(facebook.getHome());
+			listaPosts.addAll(facebook.searchPosts("iscte"));
 		} catch (facebook4j.FacebookException e) {
 			e.printStackTrace();
 		}
