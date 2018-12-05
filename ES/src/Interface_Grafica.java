@@ -1,6 +1,8 @@
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,6 +21,9 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import twitter4j.TwitterException;
+
 import javax.swing.JButton;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -49,6 +54,7 @@ public class Interface_Grafica {
 	private JScrollPane scrollPane = new JScrollPane();
 	private JScrollPane scrollPaneTwitter = new JScrollPane();
 	private int indiceTwitter;
+	private JTextField pesquisaTwitter =new JTextField();
 
 	private Facebook face;
 	JTextPane postAtual = new JTextPane();
@@ -214,6 +220,19 @@ public class Interface_Grafica {
 
 		panel_0.removeAll();
 		panel_0.repaint();
+		
+		pesquisaTwitter.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent e){
+
+                    try {
+						twitter.pesquisa(pesquisaTwitter.getText());
+					} catch (TwitterException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+            }});
 		scrollPane.setViewportView(listaTweets);
 		scrollPaneTwitter.setViewportView(tweet);
 		JButton likeTwitter = new JButton();
@@ -224,13 +243,13 @@ public class Interface_Grafica {
 		ImageIcon retweetImage = new ImageIcon(this.getClass().getResource("Retweet.png"));
 		retweetImage.setImage(getScaledImage(retweetImage.getImage(), 35, 35));
 		retwitte.setIcon(retweetImage);
-
 		GroupLayout gl_panel = new GroupLayout(panel_0);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
 				.createSequentialGroup().addGap(23)
 				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(ComponentPlacement.RELATED, 1184, Short.MAX_VALUE)
 				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(pesquisaTwitter)
 						.addComponent(scrollPaneTwitter, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel.createSequentialGroup().addComponent(likeTwitter)
 								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -239,12 +258,14 @@ public class Interface_Grafica {
 		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
 				.createSequentialGroup().addContainerGap(707, Short.MAX_VALUE)
 				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
+						.addComponent(pesquisaTwitter)
 						.addComponent(scrollPaneTwitter, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
 						.addGap(18)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(likeTwitter)
 								.addComponent(retwitte)))
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE))
 				.addGap(286)));
+		
 		panel_0.setLayout(gl_panel);
 
 		listaTweets.addMouseListener(new MouseAdapter() {
