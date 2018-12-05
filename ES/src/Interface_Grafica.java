@@ -24,6 +24,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.swing.JTextPane;
 
+
+	/**
+	 * Construtor da Interface Gráfica com sistema de TabbedPane e com ScrollPane para a selação de elementos
+	 * respetivos a Tweets, Mails e posts de Facebook
+	 */
 public class Interface_Grafica {
 
 	private JFrame frame;
@@ -70,6 +75,11 @@ public class Interface_Grafica {
 			}
 		});
 	}
+	
+	/**
+	 * Método initialize que cria a JFrame, personaliza as TabPanes, cria os botoes de log in e em seguida
+	 * inicializam as respetivas APIs
+	 */
 
 	private void initialize() {
 		frame = new JFrame();
@@ -103,8 +113,8 @@ public class Interface_Grafica {
 				botaoLoginTwitter();
 			}
 		});
-		// iniciaFace();
-		//
+
+		
 		JButton logInFace = new JButton("Log In");
 		GroupLayout g2_panel = new GroupLayout(panel_1);
 		g2_panel.setHorizontalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
@@ -140,20 +150,12 @@ public class Interface_Grafica {
 				botaoLoginMail();
 			}
 		});
-		//
-		//
-		//
-		//
-		// POR BOTOES PARA LOG IN
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		//
 	}
+	
+	/**
+	 * Quando premido é executado o método de log in que pede as credenciais e inicia uma nova AppTwitter, sendo esta uma Thread que corre
+	 * de seguida o seu método run(), executando em seguida o método iniciaTwitter().
+	 */
 
 	public void botaoLoginTwitter() {
 		String consumerKey = JOptionPane.showInputDialog("Please insert your Consumer Key");
@@ -167,6 +169,11 @@ public class Interface_Grafica {
 
 	}
 
+	/**
+	 * Quando premido é executado o método de log in que pede as credenciais e inicia um novo Facebook, sendo esta uma Thread que corre
+	 * de seguida o seu método run(), executando em seguida o método iniciaFace().
+	 */
+	
 	public void botaoLoginFace() {
 		String accessToken = JOptionPane.showInputDialog("Please insert your Access Token");
 		Facebook face = new Facebook(accessToken, this);
@@ -176,6 +183,12 @@ public class Interface_Grafica {
 
 	}
 
+	/**
+	 * Quando premido é executado o método de log in que pede as credenciais e inicia um novo Mail, sendo esta uma Thread que corre
+	 * de seguida o seu método run(), executando em seguida o método iniciaMail(), sendo que este fecha a conecção com o servidor quando é 
+	 * fechada a aplicação.
+	 */
+	
 	public void botaoLoginMail() {
 		String email = JOptionPane.showInputDialog("Please insert your Mail");
 		String password = JOptionPane.showInputDialog("Please insert your Password");
@@ -192,6 +205,11 @@ public class Interface_Grafica {
 		iniciaMail();
 	}
 
+	/**
+	 * Método iniciaTwitter() que faz uma limpeza da JFrame e inicia a nova Interface do Twitter que apresenta uma lista de Posts,
+	 * o Post que o utilizador pretende observar e que permite ao utilizador dar Fav ou Retweetar posts.
+	 */
+	
 	private void iniciaTwitter() {
 
 		panel_0.removeAll();
@@ -251,6 +269,11 @@ public class Interface_Grafica {
 			}
 		});
 	}
+	
+	/**
+	 * Método iniciaFace() que faz uma limpeza da JFrame e inicia a nova Interface do Facebook que apresenta uma lista de Posts,
+	 * o Post que o utilizador pretende observar e que permite ao utilizador dar like ou partilhar posts.
+	 */
 
 	private void iniciaFace() {
 
@@ -264,9 +287,9 @@ public class Interface_Grafica {
 		likeFaceImagem.setImage(getScaledImage(likeFaceImagem.getImage(), 35, 35));
 		likeFace.setIcon(likeFaceImagem);
 		JButton partilhar = new JButton();
-		ImageIcon parilharFace = new ImageIcon(this.getClass().getResource("PartilharFace.jpg"));
-		parilharFace.setImage(getScaledImage(parilharFace.getImage(), 35, 35));
-		partilhar.setIcon(parilharFace);
+		ImageIcon partilharFace = new ImageIcon(this.getClass().getResource("PartilharFace.jpg"));
+		partilharFace.setImage(getScaledImage(partilharFace.getImage(), 35, 35));
+		partilhar.setIcon(partilharFace);
 
 		GroupLayout g2_panel = new GroupLayout(panel_1);
 		g2_panel.setHorizontalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
@@ -292,6 +315,11 @@ public class Interface_Grafica {
 
 	}
 
+	/**
+	 * Método iniciaMail() que faz uma limpeza da JFrame e inicia a nova Interface do Mail que apresenta uma lista de e-mails recebidos,
+	 * o e-mail que o utilizador pretende observar e que permite ao utilizador responder ou reencaminhar o e-mail selecionado.
+	 */
+	
 	private void iniciaMail() {
 
 		panel_2.removeAll();
@@ -371,6 +399,10 @@ public class Interface_Grafica {
 		panel_2.validate();
 
 	}
+	
+	/**
+	 * Método para reajustar o tamanho das imagens ao tamanho disponível pela formatação dos botões
+	 */
 
 	private Image getScaledImage(Image srcImg, int w, int h) {
 		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
