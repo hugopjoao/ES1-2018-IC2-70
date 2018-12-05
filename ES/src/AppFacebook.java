@@ -4,23 +4,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import com.restfb.exception.FacebookException;
+import facebook4j.Facebook;
+import facebook4j.FacebookFactory;
+import facebook4j.Post;
+import facebook4j.conf.ConfigurationBuilder;
 
-import com.restfb.Connection;
-import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
-import com.restfb.Parameter;
-import com.restfb.types.FacebookType;
-import com.restfb.types.Post;
-import com.restfb.types.Thread;
-import com.restfb.types.User;
-
-import twitter4j.Status;
-
-public class Facebook extends Thread{
+public class AppFacebook extends Thread{
 
 	private Interface_Grafica gui;
 	private String accessToken = "EAAMZCl2Ln2ZAkBACjFPMwoMN9zPqZAjiEx6ZChZCWDAWj56zJjXJTq15DkcLZBZCCGXpvb2Ih79VWZB4Vdk0jwQ7vvEVPsYbimEcgJC5x8tU3hU7i4DL1ET2e0pNuZCuFsYYy8ESf6FGanwMJbxkzC0bQdgrUNA4VSHW0JZAqLyTOawHZAGFNkc7BhSBZC5cHF8m3iInOQeCrr20Ka5GmsJSZBOSy7SbnVZCxXpLwmJ3ok9tuxuZBDGEPydKWEI";
-	private FacebookClient facebookClient;
+	private Facebook facebook;
 	public ArrayList <Post> listaPosts = new ArrayList <Post>();
 	
 	/* Access token:
@@ -31,7 +25,7 @@ public class Facebook extends Thread{
 	 * https://www.facebook.com/ISCTEBusinessSchool/?ref=br_rs
 	 */
 	
-	public Facebook (String accessToken, Interface_Grafica gui) {
+	public AppFacebook (String accessToken, Interface_Grafica gui) {
 		this.accessToken = accessToken;
 		this.gui = gui;
 	}
@@ -44,51 +38,66 @@ public class Facebook extends Thread{
 	 */
 	
 	public void run () {
-		
-		 facebookClient = new DefaultFacebookClient(accessToken);
-		    User user = facebookClient.fetchObject("me", User.class); 
-		    System.out.println("User name: " + user.getName()); 
-		    
-		    Connection<Post> page1 = facebookClient.fetchConnection("Istar-Iul-1008842092466001"+"/feed", Post.class,Parameter.with("limit",999));
-		    List<Post> pagePosts1 = page1.getData();
-	
-		    
-		    Connection<Post> page2 = facebookClient.fetchConnection("ISCTEIUL/?ref=br_rs"+"/feed", Post.class,Parameter.with("limit",999));
-		    List<Post> pagePosts2 = page2.getData();
-		    
-		    Connection<Post> page3 = facebookClient.fetchConnection("ISCTEBusinessSchool/?ref=br_rs"+"/feed", Post.class,Parameter.with("limit",999));
-		    List<Post> pagePosts3 = page3.getData();
-		   
-		    listaPosts.addAll(pagePosts1);
-		    listaPosts.addAll(pagePosts2);
-		    listaPosts.addAll(pagePosts3);
-		    
-		    // listaPosts.sort(c); 
-		    Collections.sort(listaPosts, new CustomComparator());
-		    Collections.reverse(listaPosts); 
-		    
-		    for (Post post : listaPosts) {
-		    	enviaPosts(post);
-		    }
-	}
-	
-	
-	public void like (Post p) {
-		
-		String postId = p.getId();
-		
-		DefaultFacebookClient client = new DefaultFacebookClient(accessToken);
-		client.publish(postId+"/likes", Boolean.class); 
+		configuracao();
+		feed();
 		
 	}
 	
-	public void partilhar(Post p) {
+	public void configuracao() {
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+		cb.setDebugEnabled(true).setRestBaseURL("https://graph.facebook.com/v2.0/");  // <- set v2.0
+		FacebookFactory ff = new FacebookFactory(cb.build());
+		facebook = ff.getInstance();
+	}
+	
+	public void feed() {
+		gui.modelFacebook.removeAllElements();
+		listaPosts.removeAll(listaPosts);
 		
+		try {
+			listaPosts.addAll(facebook.getHome());
+		} catch (facebook4j.FacebookException e) {
+			e.printStackTrace();
+		}
+	
+		
+		//Collections.sort(listaPosts, new CustomComparator());
+		
+		for (Post post : listaPosts) {
+			enviaPosts(post);
+		}
+		
+	}
+	
+	public void comment(String comentario, Post p) {
 		String postId = p.getId();
 		
-		DefaultFacebookClient client = new DefaultFacebookClient(accessToken);
-		client.publish("me/feed", FacebookType.class, Parameter.with("link", postId));
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+		cb.setDebugEnabled(true).setRestBaseURL("https://graph.facebook.com/v2.0/");  // <- set v2.0
+		FacebookFactory ff = new FacebookFactory(cb.build());
+		facebook = ff.getInstance();
 		
+		try {
+			facebook.commentPost(postId, comentario);
+		} catch (facebook4j.FacebookException e) {
+			e.printStackTrace();
+		}
+	}
+		
+		
+		
+	public void like(Post p) {
+		String postId = p.getId();
+		
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+		cb.setDebugEnabled(true).setRestBaseURL("https://graph.facebook.com/v2.0/");  // <- set v2.0
+		FacebookFactory ff = new FacebookFactory(cb.build());
+		facebook = ff.getInstance();
+			try {
+				facebook.likePost(postId);
+			} catch (facebook4j.FacebookException e) {
+				e.printStackTrace();
+			}
 	}
 	
 	private void enviaPosts(Post p) {
