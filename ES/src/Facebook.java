@@ -14,15 +14,17 @@ import com.restfb.types.Post;
 import com.restfb.types.Thread;
 import com.restfb.types.User;
 
+import twitter4j.Status;
+
 public class Facebook extends Thread{
 
 	private Interface_Grafica gui;
-	private String accessToken = "EAAMZCl2Ln2ZAkBAG7R2cqKbcuNtedERPNUpLZCczaQtFxZB6E4dZAnMZAP4xB7ZBBwWxdAgmAbfZCGGWk5F4PRDZAFSI9ZCpbGCqbjCtI1hKLnItg0CQkR6cqxvEyo0c2Olv1w6X8DQjZAdZAMfjxZB6AWxQiQ4EARmon12NA4Es9iq4sMzOxla05nqDw33Hote0OyP08dJsWfJyy9Ohye2HM1ZBo3fchnpEsmH8irTxEYKAfLAQlK2TAUsEyF";
+	private String accessToken = "EAAMZCl2Ln2ZAkBACjFPMwoMN9zPqZAjiEx6ZChZCWDAWj56zJjXJTq15DkcLZBZCCGXpvb2Ih79VWZB4Vdk0jwQ7vvEVPsYbimEcgJC5x8tU3hU7i4DL1ET2e0pNuZCuFsYYy8ESf6FGanwMJbxkzC0bQdgrUNA4VSHW0JZAqLyTOawHZAGFNkc7BhSBZC5cHF8m3iInOQeCrr20Ka5GmsJSZBOSy7SbnVZCxXpLwmJ3ok9tuxuZBDGEPydKWEI";
 	private FacebookClient facebookClient;
 	public ArrayList <Post> listaPosts = new ArrayList <Post>();
 	
 	/* Access token:
-	 EAAMZCl2Ln2ZAkBAG7R2cqKbcuNtedERPNUpLZCczaQtFxZB6E4dZAnMZAP4xB7ZBBwWxdAgmAbfZCGGWk5F4PRDZAFSI9ZCpbGCqbjCtI1hKLnItg0CQkR6cqxvEyo0c2Olv1w6X8DQjZAdZAMfjxZB6AWxQiQ4EARmon12NA4Es9iq4sMzOxla05nqDw33Hote0OyP08dJsWfJyy9Ohye2HM1ZBo3fchnpEsmH8irTxEYKAfLAQlK2TAUsEyF */
+	 EAAMZCl2Ln2ZAkBACjFPMwoMN9zPqZAjiEx6ZChZCWDAWj56zJjXJTq15DkcLZBZCCGXpvb2Ih79VWZB4Vdk0jwQ7vvEVPsYbimEcgJC5x8tU3hU7i4DL1ET2e0pNuZCuFsYYy8ESf6FGanwMJbxkzC0bQdgrUNA4VSHW0JZAqLyTOawHZAGFNkc7BhSBZC5cHF8m3iInOQeCrr20Ka5GmsJSZBOSy7SbnVZCxXpLwmJ3ok9tuxuZBDGEPydKWEI */
 	
 	/* https://www.facebook.com/Istar-Iul-1008842092466001/ 
 	 * https://www.facebook.com/ISCTEIUL/?ref=br_rs
@@ -91,6 +93,19 @@ public class Facebook extends Thread{
 	
 	private void enviaPosts(Post p) {
 		gui.modelFacebook.addElement(p.getName() + " || " + p.getCreatedTime());
+	}
+	
+	public Post getIndex(int index) {
+		return listaPosts.get(index);
+	}
+
+	/**
+	 * Implementação de um método que recebe um indíce sob a forma de um inteiro, e
+	 * imprime na Gui o status correspondente ao obtido no método getIndex(index).
+	 */
+
+	public void imprimeIndex(int index) {
+		gui.postAtual.setText(getIndex(index).getCaption());
 	}
 	
 }

@@ -184,7 +184,7 @@ public class Interface_Grafica {
 		String accessToken = JOptionPane.showInputDialog("Please insert your Access Token");
 		Facebook face = new Facebook(accessToken, this);
 		this.face = face;
-		//face.run();
+		face.run();
 		iniciaFace();
 
 	}
@@ -301,7 +301,9 @@ public class Interface_Grafica {
 		panel_1.removeAll();
 		panel_1.repaint();
 
-		JTextPane post = new JTextPane();
+		//JTextPane post = new JTextPane();
+		scrollPaneFace.setViewportView(listaPosts);
+		scrollPaneFacePost.setViewportView(postAtual);
 
 		JButton likeFace = new JButton();
 		ImageIcon likeFaceImagem = new ImageIcon(this.getClass().getResource("LikeFacebook.jpg"));
@@ -318,7 +320,7 @@ public class Interface_Grafica {
 				.addComponent(listaPosts, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(ComponentPlacement.RELATED, 1184, Short.MAX_VALUE)
 				.addGroup(g2_panel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(post, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+						.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
 						.addGroup(g2_panel.createSequentialGroup().addComponent(likeFace)
 								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(partilhar)))
@@ -326,11 +328,34 @@ public class Interface_Grafica {
 		g2_panel.setVerticalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
 				.createSequentialGroup().addContainerGap(707, Short.MAX_VALUE)
 				.addGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel.createSequentialGroup()
-						.addComponent(post, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE).addGap(18)
+						.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE).addGap(18)
 						.addGroup(g2_panel.createParallelGroup(Alignment.BASELINE).addComponent(likeFace)
 								.addComponent(partilhar)))
 						.addComponent(listaPosts, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE))
 				.addGap(286)));
+		
+		listaPosts.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				if(evt.getClickCount() == 1) {
+					int index = listaPosts.locationToIndex(evt.getPoint());
+							face.imprimeIndex(index);
+							indiceFace = index;
+				}
+			}
+		});
+		
+		likeFace.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				face.like(face.getIndex(indiceFace));
+			}
+		});
+		
+		partilhar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				face.partilhar(face.getIndex(indiceFace));
+			}
+		});
+		
 		panel_1.setLayout(g2_panel);
 		panel_1.validate();
 
