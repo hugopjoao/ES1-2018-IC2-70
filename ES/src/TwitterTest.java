@@ -1,7 +1,3 @@
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
 import com.restfb.Facebook;
 
 public class TwitterTest {
@@ -10,7 +6,7 @@ public class TwitterTest {
 	public void test() {
 		Interface_Grafica gui = new Interface_Grafica();//secalhar tenho de meter a interface em publico
 		AppTwitter t= new AppTwitter("78363","iscte","Engenharia","software",gui);
-		String output = t.consummerKey();
+		String output = t.consumerKey();
 		assertEquals("78363",output);
 		
 	}

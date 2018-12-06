@@ -301,21 +301,6 @@ public class Interface_Grafica {
 
 		panel_1.removeAll();
 		panel_1.repaint();
-
-		comentarioFacebook.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-
-				try {
-					face.comment(comentarioFacebook.getText(), face.getIndex(indiceFace));
-				} catch (FacebookException e1) {
-					e1.printStackTrace();
-				}
-
-			}
-		});
-
-		// JTextPane post = new JTextPane();
 		scrollPaneFace.setViewportView(listaPosts);
 		scrollPaneFacePost.setViewportView(postAtual);
 
@@ -323,30 +308,32 @@ public class Interface_Grafica {
 		ImageIcon likeFaceImagem = new ImageIcon(this.getClass().getResource("LikeFacebook.jpg"));
 		likeFaceImagem.setImage(getScaledImage(likeFaceImagem.getImage(), 35, 35));
 		likeFace.setIcon(likeFaceImagem);
-		/*
-		 * JButton partilhar = new JButton(); ImageIcon partilharFace = new
-		 * ImageIcon(this.getClass().getResource("PartilharFace.jpg"));
-		 * partilharFace.setImage(getScaledImage(partilharFace.getImage(), 35, 35));
-		 * partilhar.setIcon(partilharFace);
-		 */
+		
+		 JButton comentar = new JButton(); 
+		 ImageIcon comentarFace = new ImageIcon(this.getClass().getResource("CommentFacebook.png"));
+		 comentarFace.setImage(getScaledImage(comentarFace.getImage(), 35, 35));
+		 comentar.setIcon(comentarFace);
+		 
 
-		GroupLayout g2_panel = new GroupLayout(panel_1);
-		g2_panel.setHorizontalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
-				.createSequentialGroup().addGap(23)
-				.addComponent(listaPosts, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(ComponentPlacement.RELATED, 1184, Short.MAX_VALUE)
-				.addGroup(g2_panel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-						.addGroup(g2_panel.createSequentialGroup().addComponent(likeFace).addPreferredGap(
-								ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-				.addContainerGap()));
-		g2_panel.setVerticalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
-				.createSequentialGroup().addContainerGap(707, Short.MAX_VALUE)
-				.addGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel.createSequentialGroup()
-						.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
-						.addGap(18).addGroup(g2_panel.createParallelGroup(Alignment.BASELINE).addComponent(likeFace)))
-						.addComponent(listaPosts, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE))
-				.addGap(286)));
+		 GroupLayout g2_panel = new GroupLayout(panel_1);
+			g2_panel.setHorizontalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
+					.createSequentialGroup().addGap(23)
+					.addComponent(listaPosts, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 1184, Short.MAX_VALUE)
+					.addGroup(g2_panel.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+							.addGroup(g2_panel.createSequentialGroup().addComponent(likeFace)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(comentar)))
+					.addContainerGap()));
+			g2_panel.setVerticalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
+					.createSequentialGroup().addContainerGap(707, Short.MAX_VALUE)
+					.addGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel.createSequentialGroup()
+							.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE).addGap(18)
+							.addGroup(g2_panel.createParallelGroup(Alignment.BASELINE).addComponent(likeFace)
+									.addComponent(comentar)))
+							.addComponent(listaPosts, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE))
+					.addGap(286)));
 
 		listaPosts.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
@@ -358,6 +345,13 @@ public class Interface_Grafica {
 			}
 		});
 
+		comentar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String texto = JOptionPane.showInputDialog("Please insert your Comment");
+				face.comment(texto, face.getIndex(indiceFace));				
+			}
+		});
+		
 		likeFace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				face.like(face.getIndex(indiceFace));

@@ -25,35 +25,37 @@ public class AppTwitter extends Thread {
 
 	public AppTwitter(String consumerKey, String consumerSecret, String accessToken, String tokenSecret,
 			Interface_Grafica gui) {
-		// this.consumerKey = consumerKey;
-		// this.consumerSecret = consumerSecret;
-		// this.accessToken = accessToken;
-		// this.tokenSecret = tokenSecret;
+		this.consumerKey = consumerKey;
+		this.consumerSecret = consumerSecret;
+		this.accessToken = accessToken;
+		this.tokenSecret = tokenSecret;
 
-		this.consumerKey = "EpysCbFJ3KN0X7qoDk5llztD8";
-		this.consumerSecret = "XlVwrmtx9JeQucykuukThiC4nYZa34L4jQJuUwLP4bgXjAnlEu";
-		this.accessToken = "832318636555636737-GxsN6MvuUKHqF8N0hxzmO2w1EpWx4HA";
-		this.tokenSecret = "yCbc6VKR1K7TYIjDiidVrlbyUkNX2tNo2QveVKr7ol8WB";
+		// this.consumerKey = "EpysCbFJ3KN0X7qoDk5llztD8";
+		// this.consumerSecret = "XlVwrmtx9JeQucykuukThiC4nYZa34L4jQJuUwLP4bgXjAnlEu";
+		// this.accessToken = "832318636555636737-GxsN6MvuUKHqF8N0hxzmO2w1EpWx4HA";
+		// this.tokenSecret = "yCbc6VKR1K7TYIjDiidVrlbyUkNX2tNo2QveVKr7ol8WB";
 
 		this.gui = gui;
 
 	}
 
 	/**
-	 * Implementação do método run correspondente à Thread AppTwitter implementa o método configuracao() 
-	 * para fazer a ligação ao servidor e o método timeLine() para imprimir a timeLine do utilizador.
+	 * Implementação do método run correspondente à Thread AppTwitter implementa o
+	 * método configuracao() para fazer a ligação ao servidor e o método timeLine()
+	 * para imprimir a timeLine do utilizador.
 	 */
-	
+
 	public void run() {
 		configuracao();
 		timeLine();
 
 	}
-	
+
 	/**
-	 * Implementação do método configuracao que através dos tokens atribuidos, faz a ligação ao servidor do twitter
+	 * Implementação do método configuracao que através dos tokens atribuidos, faz a
+	 * ligação ao servidor do twitter
 	 */
-	
+
 	public void configuracao() {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true).setOAuthConsumerKey(consumerKey).setOAuthConsumerSecret(consumerSecret)
@@ -62,10 +64,9 @@ public class AppTwitter extends Thread {
 		twitter1 = tf.getInstance();
 	}
 
-
-	
 	/**
-	 * Implementação do método timeLine que imprime na gui toda a TimeLine do utilizador
+	 * Implementação do método timeLine que imprime na gui toda a TimeLine do
+	 * utilizador
 	 */
 
 	public void timeLine() {
@@ -155,10 +156,10 @@ public class AppTwitter extends Thread {
 	}
 
 	/**
-	 * Implementação do método pesquisa que recebe uma string e permite ao utilizador pesquisar por esse termo em tweets da sua
-	 * TimeLine
+	 * Implementação do método pesquisa que recebe uma string e permite ao
+	 * utilizador pesquisar por esse termo em tweets da sua TimeLine
 	 */
-	
+
 	public void pesquisa(String text) throws TwitterException {
 		gui.modelTwitter.removeAllElements();
 		listaStatus.removeAll(listaStatus);

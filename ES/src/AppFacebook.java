@@ -13,7 +13,7 @@ import facebook4j.conf.ConfigurationBuilder;
 public class AppFacebook extends Thread{
 
 	private Interface_Grafica gui;
-	private String accessToken = "EAAMZCl2Ln2ZAkBAEof3X5g9YRoFpt6LpJqCW6fGITYFoHZCSz2MDbmaFtlFbMwkohrg0LZCkwrepdCA8ZAh20pYZBtYqCZAtrwr03ZCQeNZClgxmnUJewarsFBSjWPEKr13nUc2J9KJUZAQZB6CzIXFJeal3lFnzrorowCCtAixAS5M0wDZBvwDuyHTVlEJ2vcldzyoXCAG1ZBZCvX5rjrMEFtl35Phm5r9XUmL7wajRXSncBeTidvTCKW6rMA";
+	private String accessToken;
 	private Facebook facebook;
 	public ArrayList <Post> listaPosts = new ArrayList <Post>();
 	
@@ -26,7 +26,7 @@ public class AppFacebook extends Thread{
 	 */
 	
 	public AppFacebook (String accessToken, Interface_Grafica gui) {
-		this.accessToken = accessToken;
+		this.accessToken = "EAAMZCl2Ln2ZAkBAEof3X5g9YRoFpt6LpJqCW6fGITYFoHZCSz2MDbmaFtlFbMwkohrg0LZCkwrepdCA8ZAh20pYZBtYqCZAtrwr03ZCQeNZClgxmnUJewarsFBSjWPEKr13nUc2J9KJUZAQZB6CzIXFJeal3lFnzrorowCCtAixAS5M0wDZBvwDuyHTVlEJ2vcldzyoXCAG1ZBZCvX5rjrMEFtl35Phm5r9XUmL7wajRXSncBeTidvTCKW6rMA";
 		this.gui = gui;
 	}
 	
