@@ -26,7 +26,7 @@ public class AppFacebook extends Thread{
 	 */
 	
 	public AppFacebook (String accessToken, Interface_Grafica gui) {
-		this.accessToken = "EAAMZCl2Ln2ZAkBAEof3X5g9YRoFpt6LpJqCW6fGITYFoHZCSz2MDbmaFtlFbMwkohrg0LZCkwrepdCA8ZAh20pYZBtYqCZAtrwr03ZCQeNZClgxmnUJewarsFBSjWPEKr13nUc2J9KJUZAQZB6CzIXFJeal3lFnzrorowCCtAixAS5M0wDZBvwDuyHTVlEJ2vcldzyoXCAG1ZBZCvX5rjrMEFtl35Phm5r9XUmL7wajRXSncBeTidvTCKW6rMA";
+		this.accessToken = "EAAMZCl2Ln2ZAkBAOOClBI6wcfLKsnpGH19OvGbNA0YRVYy8114crcX6GTPW42O1fHQkzficIkcCvxL4h8Tf1hg6ZCWZAmyE1aAzz1dV71ImS2uZCMKdH40DZCChF0CpW9Wb1V4UIEZB0BKiTaMwcblVXmAVUFo6YMTWhdsP5mlZBztAsMORkrZBwDYDAu7Etobj64ZCd9exjSVTV24OKGZBsCZC93DkqQZBVnT6hLFWCpVTyJrQZDZD";
 		this.gui = gui;
 	}
 	
@@ -45,7 +45,9 @@ public class AppFacebook extends Thread{
 	
 	public void configuracao() {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true).setRestBaseURL("https://graph.facebook.com/v2.0/");  // <- set v2.0
+		cb.setDebugEnabled(true)
+		  .setOAuthAppId("")
+		  .setOAuthAccessToken("EAAMZCl2Ln2ZAkBAOOClBI6wcfLKsnpGH19OvGbNA0YRVYy8114crcX6GTPW42O1fHQkzficIkcCvxL4h8Tf1hg6ZCWZAmyE1aAzz1dV71ImS2uZCMKdH40DZCChF0CpW9Wb1V4UIEZB0BKiTaMwcblVXmAVUFo6YMTWhdsP5mlZBztAsMORkrZBwDYDAu7Etobj64ZCd9exjSVTV24OKGZBsCZC93DkqQZBVnT6hLFWCpVTyJrQZDZD");
 		FacebookFactory ff = new FacebookFactory(cb.build());
 		facebook = ff.getInstance();
 	}
@@ -73,7 +75,8 @@ public class AppFacebook extends Thread{
 		String postId = p.getId();
 		
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true).setRestBaseURL("https://graph.facebook.com/v2.0/");  // <- set v2.0
+		cb.setDebugEnabled(true)
+		  .setOAuthAccessToken("EAAMZCl2Ln2ZAkBAOOClBI6wcfLKsnpGH19OvGbNA0YRVYy8114crcX6GTPW42O1fHQkzficIkcCvxL4h8Tf1hg6ZCWZAmyE1aAzz1dV71ImS2uZCMKdH40DZCChF0CpW9Wb1V4UIEZB0BKiTaMwcblVXmAVUFo6YMTWhdsP5mlZBztAsMORkrZBwDYDAu7Etobj64ZCd9exjSVTV24OKGZBsCZC93DkqQZBVnT6hLFWCpVTyJrQZDZD");
 		FacebookFactory ff = new FacebookFactory(cb.build());
 		facebook = ff.getInstance();
 		
@@ -90,7 +93,7 @@ public class AppFacebook extends Thread{
 		String postId = p.getId();
 		
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true).setRestBaseURL("https://graph.facebook.com/v2.0/");  // <- set v2.0
+		cb.setDebugEnabled(true).setOAuthAccessToken("EAAMZCl2Ln2ZAkBAOOClBI6wcfLKsnpGH19OvGbNA0YRVYy8114crcX6GTPW42O1fHQkzficIkcCvxL4h8Tf1hg6ZCWZAmyE1aAzz1dV71ImS2uZCMKdH40DZCChF0CpW9Wb1V4UIEZB0BKiTaMwcblVXmAVUFo6YMTWhdsP5mlZBztAsMORkrZBwDYDAu7Etobj64ZCd9exjSVTV24OKGZBsCZC93DkqQZBVnT6hLFWCpVTyJrQZDZD");
 		FacebookFactory ff = new FacebookFactory(cb.build());
 		facebook = ff.getInstance();
 			try {
