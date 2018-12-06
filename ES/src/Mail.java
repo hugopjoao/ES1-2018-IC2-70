@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -124,14 +126,95 @@ public class Mail extends Thread{
 	}
 
 	public void encaminhar() {
-		// TODO Auto-generated method stub
+		Properties props = new Properties(); 
+		 props.put("mail.smtp.auth", "true"); 
+		 props.put("mail.smtp.starttls.enable", "true"); 
+		
+		 
+		try {
+		 Authenticator auth = new PasswordAuthentication(username, password);
+		 Session session = Session.getInstance(props, auth);
+		 
+		 Store mailStore = session.getStore(mailStoreType);
+		 mailStore.connect(emailSMTPserver, username, password);
+		 
+		 Folder folder = mailStore.getFolder("INBOX");
+		 folder.open(Folder.READ_ONLY);
+		 
+		 Message[] messages = folder.getMessages();
+		 System.out.println("Total Message - " + messages.length);
+		 
+		 BufferedReader reader = 
+		 	new BufferedReader(new InputStreamReader(System.in));
+		 
+		 for (int i = 0; i < messages.length; i++) {
+		   Message emailMessage = messages[i];
+		   System.out.println();  
+		   System.out.println("Email " + (i+1) + " -");  
+		   System.out.println("Subject - " + emailMessage.getSubject());  
+		   System.out.println("From - " + emailMessage.getFrom()[0]); 
+		 }
+		 
+		 System.out.print("Enter email number to " +
+		 		"which you want to forward: ");
+		 String emailNo = reader.readLine();
+		 
+		 Message emailMessage = 
+			 folder.getMessage(Integer.parseInt(emailNo) - 1);
+		 
+		 Message mimeMessage = new MimeMessage(session);
+		 mimeMessage = (MimeMessage) emailMessage.reply(false);
+		 mimeMessage.setFrom(new InternetAddress(username));
+		 mimeMessage.setSubject("Fwd: " + mimeMessage.getSubject()); 
+		 mimeMessage.setText(forwardedText);
+		 mimeMessage.setRecipients(Message.RecipientType.TO, 
+					InternetAddress.parse(to));
+		 
+		 Transport.send(mimeMessage);
+		 System.out.println("Email message " +
+		   "forwarded successfully.");   
+		 
+		   folder.close(false);
+		   mailStore.close();
+		 } catch (Exception e) {
+		    e.printStackTrace();
+		    System.err.println("Error in forwarding email.");
+		 }        
+		}
+		 
 
-	}
+	
 
 	/**
 	 * imprimir mail. aparece na gui o texto
 	 */
 
+	
+	
+	public void enviarMail( String username, String []origem2) {
+		try { 			
+			Authenticator auth = new SMTPAuthenticator();
+	                Session session = Session.getInstance(properties, auth);
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(username));
+			message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(origem2));
+			message.setSubject(subject);
+			message.setText(messageText);
+	 
+			Transport.send(message); 
+			System.out.println("Email send successfully."); 
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    System.err.println("Error in sending email.");
+	   }
+	}
+		
+		
+		
+		
+		
+		
+	}
 	public void imprimeMail(int index) throws IOException, MessagingException {
 		Message message = messages[index];
 		Object content = message.getContent();
