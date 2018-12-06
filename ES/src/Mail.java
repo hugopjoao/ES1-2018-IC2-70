@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.swing.JOptionPane;
 
-public class Mail extends Thread{
+public class Mail extends Thread {
 
 	private String username;
 	private String password;
@@ -28,6 +28,10 @@ public class Mail extends Thread{
 	private Session session;
 	private String server;
 	private Properties connectionProperties;
+
+	final String emailSMTPPort = "587";
+	final String mailStoreType = "pop3s";
+	final String emailSMTPserver = "smtpout.secureserver.net";
 
 	/**
 	 * construtor para o mail com username e respetiva password. inicialização da
@@ -90,18 +94,17 @@ public class Mail extends Thread{
 	}
 
 	/**
-	 * metódo para responder a um mail. username para quem se responde, origem da mensagem e string texto com 
-	 * texto da mensagem a ser enviada
+	 * metódo para responder a um mail. username para quem se responde, origem da
+	 * mensagem e string texto com texto da mensagem a ser enviada
 	 */
-	
-	
+
 	@SuppressWarnings("static-access")
-		public void responder(int index) throws MessagingException {
+	public void responder(int index) throws MessagingException {
 		Message mensagem = messages[index];
-		String to = username;
+		String from= username;
 		String[] origem = mensagem.getFrom()[0].toString().split("<");
 		String[] origem2 = origem[1].split(">");
-		String from = origem2[0];
+		String to = origem2[0];
 		String subject = mensagem.getSubject();
 		MimeMessage msg = new MimeMessage(session);
 		try {
@@ -126,95 +129,84 @@ public class Mail extends Thread{
 	}
 
 	public void encaminhar() {
-		Properties props = new Properties(); 
-		 props.put("mail.smtp.auth", "true"); 
-		 props.put("mail.smtp.starttls.enable", "true"); 
-		
-		 
-		try {
-		 Authenticator auth = new PasswordAuthentication(username, password);
-		 Session session = Session.getInstance(props, auth);
-		 
-		 Store mailStore = session.getStore(mailStoreType);
-		 mailStore.connect(emailSMTPserver, username, password);
-		 
-		 Folder folder = mailStore.getFolder("INBOX");
-		 folder.open(Folder.READ_ONLY);
-		 
-		 Message[] messages = folder.getMessages();
-		 System.out.println("Total Message - " + messages.length);
-		 
-		 BufferedReader reader = 
-		 	new BufferedReader(new InputStreamReader(System.in));
-		 
-		 for (int i = 0; i < messages.length; i++) {
-		   Message emailMessage = messages[i];
-		   System.out.println();  
-		   System.out.println("Email " + (i+1) + " -");  
-		   System.out.println("Subject - " + emailMessage.getSubject());  
-		   System.out.println("From - " + emailMessage.getFrom()[0]); 
-		 }
-		 
-		 System.out.print("Enter email number to " +
-		 		"which you want to forward: ");
-		 String emailNo = reader.readLine();
-		 
-		 Message emailMessage = 
-			 folder.getMessage(Integer.parseInt(emailNo) - 1);
-		 
-		 Message mimeMessage = new MimeMessage(session);
-		 mimeMessage = (MimeMessage) emailMessage.reply(false);
-		 mimeMessage.setFrom(new InternetAddress(username));
-		 mimeMessage.setSubject("Fwd: " + mimeMessage.getSubject()); 
-		 mimeMessage.setText(forwardedText);
-		 mimeMessage.setRecipients(Message.RecipientType.TO, 
-					InternetAddress.parse(to));
-		 
-		 Transport.send(mimeMessage);
-		 System.out.println("Email message " +
-		   "forwarded successfully.");   
-		 
-		   folder.close(false);
-		   mailStore.close();
-		 } catch (Exception e) {
-		    e.printStackTrace();
-		    System.err.println("Error in forwarding email.");
-		 }        
-		}
-		 
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
 
-	
+		try {
+			Authenticator auth = new SMTPAuthenticator();
+			Session session = Session.getInstance(props, auth);
+
+			Store mailStore = session.getStore(mailStoreType);
+			mailStore.connect(emailSMTPserver, username, password);
+
+			Folder folder = mailStore.getFolder("INBOX");
+			folder.open(Folder.READ_ONLY);
+
+			Message[] messages = folder.getMessages();
+			System.out.println("Total Message - " + messages.length);
+
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+			for (int i = 0; i < messages.length; i++) {
+				Message emailMessage = messages[i];
+				System.out.println();
+				System.out.println("Email " + (i + 1) + " -");
+				System.out.println("Subject - " + emailMessage.getSubject());
+				System.out.println("From - " + emailMessage.getFrom()[0]);
+			}
+
+			System.out.print("Enter email number to " + "which you want to forward: ");
+			String emailNo = reader.readLine();
+
+			Message emailMessage = folder.getMessage(Integer.parseInt(emailNo) - 1);
+
+			Message mimeMessage = new MimeMessage(session);
+			mimeMessage = (MimeMessage) emailMessage.reply(false);
+			mimeMessage.setFrom(new InternetAddress(username));
+			mimeMessage.setSubject("Fwd: " + mimeMessage.getSubject());
+			mimeMessage.setText();
+			mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse());
+
+			Transport.send(mimeMessage);
+			System.out.println("Email message " + "forwarded successfully.");
+
+			folder.close(false);
+			mailStore.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Error in forwarding email.");
+		}
+	}
 
 	/**
 	 * imprimir mail. aparece na gui o texto
 	 */
 
-	
-	
-	public void enviarMail( String username, String []origem2) {
-		try { 			
+	public void enviarMail(String username, String[] origem2) {
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.host", emailSMTPserver);
+
+		try {
 			Authenticator auth = new SMTPAuthenticator();
-	                Session session = Session.getInstance(properties, auth);
+			Session session = Session.getInstance(props, auth);
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
-			message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(origem2));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse());
 			message.setSubject(subject);
 			message.setText(messageText);
-	 
-			Transport.send(message); 
-			System.out.println("Email send successfully."); 
-	    } catch (Exception e) {
-		e.printStackTrace();
-	    System.err.println("Error in sending email.");
-	   }
+
+			Transport.send(message);
+			System.out.println("Email send successfully.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Error in sending email.");
+		}
 	}
-		
-		
-		
-		
-		
-		
+
 	}
+
 	public void imprimeMail(int index) throws IOException, MessagingException {
 		Message message = messages[index];
 		Object content = message.getContent();
@@ -228,6 +220,12 @@ public class Mail extends Thread{
 		}
 		if (content != null) {
 			gui.mail.setText(content.toString());
+		}
+	}
+
+	private class SMTPAuthenticator extends javax.mail.Authenticator {
+		public PasswordAuthentication getPasswordAuthentication() {
+			return new PasswordAuthentication(username, password);
 		}
 	}
 
