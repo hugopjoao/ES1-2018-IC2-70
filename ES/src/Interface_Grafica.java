@@ -31,11 +31,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.swing.JTextPane;
 
-
-	/**
-	 * Construtor da Interface Gráfica com sistema de TabbedPane e com ScrollPane para a selação de elementos
-	 * respetivos a Tweets, Mails e posts de Facebook
-	 */
+/**
+ * Construtor da Interface Gráfica com sistema de TabbedPane e com ScrollPane
+ * para a selação de elementos respetivos a Tweets, Mails e posts de Facebook
+ */
 public class Interface_Grafica {
 
 	private JFrame frame;
@@ -56,14 +55,14 @@ public class Interface_Grafica {
 	private JScrollPane scrollPane = new JScrollPane();
 	private JScrollPane scrollPaneTwitter = new JScrollPane();
 	private int indiceTwitter;
-	private JTextField pesquisaTwitter =new JTextField();
+	private JTextField pesquisaTwitter = new JTextField();
 
 	private AppFacebook face;
 	JTextPane postAtual = new JTextPane();
 	private JScrollPane scrollPaneFace = new JScrollPane();
 	private JScrollPane scrollPaneFacePost = new JScrollPane();
 	private int indiceFace;
-	private JTextField comentarioFacebook =new JTextField();
+	private JTextField comentarioFacebook = new JTextField();
 
 	private Mail mailApp;
 	JTextPane mail = new JTextPane();
@@ -84,10 +83,10 @@ public class Interface_Grafica {
 			}
 		});
 	}
-	
+
 	/**
-	 * Método initialize que cria a JFrame, personaliza as TabPanes, cria os botoes de log in e em seguida
-	 * inicializam as respetivas APIs
+	 * Método initialize que cria a JFrame, personaliza as TabPanes, cria os botoes
+	 * de log in e em seguida inicializam as respetivas APIs
 	 */
 
 	private void initialize() {
@@ -123,7 +122,6 @@ public class Interface_Grafica {
 			}
 		});
 
-		
 		JButton logInFace = new JButton("Log In");
 		GroupLayout g2_panel = new GroupLayout(panel_1);
 		g2_panel.setHorizontalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
@@ -160,10 +158,11 @@ public class Interface_Grafica {
 			}
 		});
 	}
-	
+
 	/**
-	 * Quando premido é executado o método de log in que pede as credenciais e inicia uma nova AppTwitter, sendo esta uma Thread que corre
-	 * de seguida o seu método run(), executando em seguida o método iniciaTwitter().
+	 * Quando premido é executado o método de log in que pede as credenciais e
+	 * inicia uma nova AppTwitter, sendo esta uma Thread que corre de seguida o seu
+	 * método run(), executando em seguida o método iniciaTwitter().
 	 */
 
 	public void botaoLoginTwitter() {
@@ -179,10 +178,11 @@ public class Interface_Grafica {
 	}
 
 	/**
-	 * Quando premido é executado o método de log in que pede as credenciais e inicia um novo Facebook, sendo esta uma Thread que corre
-	 * de seguida o seu método run(), executando em seguida o método iniciaFace().
+	 * Quando premido é executado o método de log in que pede as credenciais e
+	 * inicia um novo Facebook, sendo esta uma Thread que corre de seguida o seu
+	 * método run(), executando em seguida o método iniciaFace().
 	 */
-	
+
 	public void botaoLoginFace() {
 		String accessToken = JOptionPane.showInputDialog("Please insert your Access Token");
 		AppFacebook face = new AppFacebook(accessToken, this);
@@ -193,49 +193,46 @@ public class Interface_Grafica {
 	}
 
 	/**
-	 * Quando premido é executado o método de log in que pede as credenciais e inicia um novo Mail, sendo esta uma Thread que corre
-	 * de seguida o seu método run(), executando em seguida o método iniciaMail(), sendo que este fecha a conecção com o servidor quando é 
-	 * fechada a aplicação.
+	 * Quando premido é executado o método de log in que pede as credenciais e
+	 * inicia um novo Mail, sendo esta uma Thread que corre de seguida o seu método
+	 * run(), executando em seguida o método iniciaMail(), sendo que este fecha a
+	 * conecção com o servidor quando é fechada a aplicação.
 	 */
-	
+
 	public void botaoLoginMail() {
 		String email = JOptionPane.showInputDialog("Please insert your Mail");
 		String password = JOptionPane.showInputDialog("Please insert your Password");
 		Mail mailNovo = new Mail(email, password, this);
 		this.mailApp = mailNovo;
-		frame.addWindowListener(new java.awt.event.WindowAdapter() {
-			@Override
-			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-				mailApp.fechar();
-				;
-			}
-		});
 		mailApp.run();
 		iniciaMail();
 	}
 
 	/**
-	 * Método iniciaTwitter() que faz uma limpeza da JFrame e inicia a nova Interface do Twitter que apresenta uma lista de Posts,
-	 * o Post que o utilizador pretende observar e que permite ao utilizador dar Fav ou Retweetar posts.
+	 * Método iniciaTwitter() que faz uma limpeza da JFrame e inicia a nova
+	 * Interface do Twitter que apresenta uma lista de Posts, o Post que o
+	 * utilizador pretende observar e que permite ao utilizador dar Fav ou Retweetar
+	 * posts.
 	 */
-	
+
 	private void iniciaTwitter() {
 
 		panel_0.removeAll();
 		panel_0.repaint();
-		
-		pesquisaTwitter.addActionListener(new ActionListener(){
 
-            public void actionPerformed(ActionEvent e){
+		pesquisaTwitter.addActionListener(new ActionListener() {
 
-                    try {
-						twitter.pesquisa(pesquisaTwitter.getText());
-					} catch (TwitterException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+			public void actionPerformed(ActionEvent e) {
 
-            }});
+				try {
+					twitter.pesquisa(pesquisaTwitter.getText());
+				} catch (TwitterException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
 		scrollPane.setViewportView(listaTweets);
 		scrollPaneTwitter.setViewportView(tweet);
 		JButton likeTwitter = new JButton();
@@ -251,8 +248,7 @@ public class Interface_Grafica {
 				.createSequentialGroup().addGap(23)
 				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(ComponentPlacement.RELATED, 1184, Short.MAX_VALUE)
-				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(pesquisaTwitter)
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false).addComponent(pesquisaTwitter)
 						.addComponent(scrollPaneTwitter, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel.createSequentialGroup().addComponent(likeTwitter)
 								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -260,15 +256,16 @@ public class Interface_Grafica {
 				.addContainerGap()));
 		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
 				.createSequentialGroup().addContainerGap(707, Short.MAX_VALUE)
-				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
-						.addComponent(pesquisaTwitter)
-						.addComponent(scrollPaneTwitter, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(likeTwitter)
-								.addComponent(retwitte)))
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup().addComponent(pesquisaTwitter)
+								.addComponent(
+										scrollPaneTwitter, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(likeTwitter)
+										.addComponent(retwitte)))
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE))
 				.addGap(286)));
-		
+
 		panel_0.setLayout(gl_panel);
 
 		listaTweets.addMouseListener(new MouseAdapter() {
@@ -293,10 +290,11 @@ public class Interface_Grafica {
 			}
 		});
 	}
-	
+
 	/**
-	 * Método iniciaFace() que faz uma limpeza da JFrame e inicia a nova Interface do Facebook que apresenta uma lista de Posts,
-	 * o Post que o utilizador pretende observar e que permite ao utilizador dar like ou partilhar posts.
+	 * Método iniciaFace() que faz uma limpeza da JFrame e inicia a nova Interface
+	 * do Facebook que apresenta uma lista de Posts, o Post que o utilizador
+	 * pretende observar e que permite ao utilizador dar like ou partilhar posts.
 	 */
 
 	private void iniciaFace() {
@@ -304,19 +302,20 @@ public class Interface_Grafica {
 		panel_1.removeAll();
 		panel_1.repaint();
 
-		comentarioFacebook.addActionListener(new ActionListener(){
+		comentarioFacebook.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e){
+			public void actionPerformed(ActionEvent e) {
 
-                   try {
-						face.comment(comentarioFacebook.getText(), face.getIndex(indiceFace));
-                   } catch (FacebookException e1) {
-                	   e1.printStackTrace();
-                   }
+				try {
+					face.comment(comentarioFacebook.getText(), face.getIndex(indiceFace));
+				} catch (FacebookException e1) {
+					e1.printStackTrace();
+				}
 
-            }});
-		
-		//JTextPane post = new JTextPane();
+			}
+		});
+
+		// JTextPane post = new JTextPane();
 		scrollPaneFace.setViewportView(listaPosts);
 		scrollPaneFacePost.setViewportView(postAtual);
 
@@ -324,10 +323,12 @@ public class Interface_Grafica {
 		ImageIcon likeFaceImagem = new ImageIcon(this.getClass().getResource("LikeFacebook.jpg"));
 		likeFaceImagem.setImage(getScaledImage(likeFaceImagem.getImage(), 35, 35));
 		likeFace.setIcon(likeFaceImagem);
-		/*JButton partilhar = new JButton();
-		ImageIcon partilharFace = new ImageIcon(this.getClass().getResource("PartilharFace.jpg"));
-		partilharFace.setImage(getScaledImage(partilharFace.getImage(), 35, 35));
-		partilhar.setIcon(partilharFace);*/
+		/*
+		 * JButton partilhar = new JButton(); ImageIcon partilharFace = new
+		 * ImageIcon(this.getClass().getResource("PartilharFace.jpg"));
+		 * partilharFace.setImage(getScaledImage(partilharFace.getImage(), 35, 35));
+		 * partilhar.setIcon(partilharFace);
+		 */
 
 		GroupLayout g2_panel = new GroupLayout(panel_1);
 		g2_panel.setHorizontalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
@@ -336,43 +337,45 @@ public class Interface_Grafica {
 				.addPreferredGap(ComponentPlacement.RELATED, 1184, Short.MAX_VALUE)
 				.addGroup(g2_panel.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-						.addGroup(g2_panel.createSequentialGroup().addComponent(likeFace)
-								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+						.addGroup(g2_panel.createSequentialGroup().addComponent(likeFace).addPreferredGap(
+								ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 				.addContainerGap()));
 		g2_panel.setVerticalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
 				.createSequentialGroup().addContainerGap(707, Short.MAX_VALUE)
 				.addGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel.createSequentialGroup()
-						.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE).addGap(18)
-						.addGroup(g2_panel.createParallelGroup(Alignment.BASELINE).addComponent(likeFace)))
+						.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+						.addGap(18).addGroup(g2_panel.createParallelGroup(Alignment.BASELINE).addComponent(likeFace)))
 						.addComponent(listaPosts, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE))
 				.addGap(286)));
-		
+
 		listaPosts.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
-				if(evt.getClickCount() == 1) {
+				if (evt.getClickCount() == 1) {
 					int index = listaPosts.locationToIndex(evt.getPoint());
-							face.imprimeIndex(index);
-							indiceFace = index;
+					face.imprimeIndex(index);
+					indiceFace = index;
 				}
 			}
 		});
-		
+
 		likeFace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				face.like(face.getIndex(indiceFace));
 			}
 		});
-				
+
 		panel_1.setLayout(g2_panel);
 		panel_1.validate();
 
 	}
 
 	/**
-	 * Método iniciaMail() que faz uma limpeza da JFrame e inicia a nova Interface do Mail que apresenta uma lista de e-mails recebidos,
-	 * o e-mail que o utilizador pretende observar e que permite ao utilizador responder ou reencaminhar o e-mail selecionado.
+	 * Método iniciaMail() que faz uma limpeza da JFrame e inicia a nova Interface
+	 * do Mail que apresenta uma lista de e-mails recebidos, o e-mail que o
+	 * utilizador pretende observar e que permite ao utilizador responder ou
+	 * reencaminhar o e-mail selecionado.
 	 */
-	
+
 	private void iniciaMail() {
 
 		panel_2.removeAll();
@@ -433,8 +436,14 @@ public class Interface_Grafica {
 
 		responder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String texto = JOptionPane.showInputDialog("Please insert your text");
+				String[] divide;
 				try {
-					mailApp.responder(indiceMail);
+					divide = mailApp.messages[indiceMail].getFrom()[0].toString().split("<");
+					String[] to = divide[1].split(">");
+					ReplyEmail responder = new ReplyEmail(mailApp.username, mailApp.password, to[0],
+							mailApp.messages[indiceMail].getSubject(), texto);
+					responder.run();
 				} catch (MessagingException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -444,7 +453,16 @@ public class Interface_Grafica {
 
 		encaminhar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mailApp.encaminhar();
+				String destinatario = JOptionPane.showInputDialog("Please insert destination email");
+				try {
+					ReplyEmail responder = new ReplyEmail(mailApp.username, mailApp.password, destinatario,
+							mailApp.messages[indiceMail].getSubject(),
+							mailApp.devolveTexto(indiceMail));
+					responder.run();
+				} catch (MessagingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -452,9 +470,10 @@ public class Interface_Grafica {
 		panel_2.validate();
 
 	}
-	
+
 	/**
-	 * Método para reajustar o tamanho das imagens ao tamanho disponível pela formatação dos botões
+	 * Método para reajustar o tamanho das imagens ao tamanho disponível pela
+	 * formatação dos botões
 	 */
 
 	private Image getScaledImage(Image srcImg, int w, int h) {
