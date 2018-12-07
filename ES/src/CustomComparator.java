@@ -2,6 +2,7 @@ import java.util.*;
 import com.restfb.types.Post;
 
 /**
+ * 
  * Classe CustomComparator, criada originalmente para fazer comparação entre 
  * a data de criação de posts de facebook, para que fosse possível
  * ordenar os mesmos, porém o facebook faz essa ordenação por si mesmo no feed.
