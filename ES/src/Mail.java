@@ -63,7 +63,6 @@ public class Mail extends Thread {
 			messages = inbox.getMessages();
 			for (Message m : messages) {
 				try {
-					System.out.println(m);
 					enviaTitulos(m);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -127,12 +126,9 @@ public class Mail extends Thread {
 				if (!pesquisas.isEmpty())
 					pesquisas.removeAll(pesquisas);
 			try {
-				System.out.println("1");
 				for (Message m : messages) {
 					String[] origem = m.getFrom()[0].toString().split("<");
-					System.out.println("3");
 					if (origem[0].contains(texto)) {
-						System.out.println(m);
 						pesquisas.add(m);
 						enviaTitulos(m);
 					}
