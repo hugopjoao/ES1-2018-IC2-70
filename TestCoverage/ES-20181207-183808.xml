@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ES" project="ES" tests="3" started="3" failures="3" errors="0" ignored="0">
+  <testsuite name="jUnitTests.AllTests" time="0.0">
+    <testsuite name="jUnitTests.FacebookTest" time="0.0">
+      <testcase name="warning" classname="junit.framework.TestSuite.1" time="0.0">
+        <failure>junit.framework.AssertionFailedError: No tests found in jUnitTests.FacebookTest&#13;
+	at junit.framework.Assert.fail(Assert.java:47)&#13;
+	at junit.framework.TestSuite$1.runTest(TestSuite.java:90)&#13;
+	at junit.framework.TestCase.runBare(TestCase.java:130)&#13;
+	at junit.framework.TestResult$1.protect(TestResult.java:106)&#13;
+	at junit.framework.TestResult.runProtected(TestResult.java:124)&#13;
+	at junit.framework.TestResult.run(TestResult.java:109)&#13;
+	at junit.framework.TestCase.run(TestCase.java:120)&#13;
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)&#13;
+	at junit.framework.TestSuite.run(TestSuite.java:225)&#13;
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)&#13;
+	at junit.framework.TestSuite.run(TestSuite.java:225)&#13;
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:124)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:541)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:763)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:463)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:209)&#13;
+&#13;
+</failure>
+      </testcase>
+    </testsuite>
+    <testsuite name="jUnitTests.MailTest" time="0.0">
+      <testcase name="warning" classname="junit.framework.TestSuite.1" time="0.0">
+        <failure>junit.framework.AssertionFailedError: No tests found in jUnitTests.MailTest&#13;
+	at junit.framework.Assert.fail(Assert.java:47)&#13;
+	at junit.framework.TestSuite$1.runTest(TestSuite.java:90)&#13;
+	at junit.framework.TestCase.runBare(TestCase.java:130)&#13;
+	at junit.framework.TestResult$1.protect(TestResult.java:106)&#13;
+	at junit.framework.TestResult.runProtected(TestResult.java:124)&#13;
+	at junit.framework.TestResult.run(TestResult.java:109)&#13;
+	at junit.framework.TestCase.run(TestCase.java:120)&#13;
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)&#13;
+	at junit.framework.TestSuite.run(TestSuite.java:225)&#13;
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)&#13;
+	at junit.framework.TestSuite.run(TestSuite.java:225)&#13;
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:124)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:541)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:763)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:463)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:209)&#13;
+&#13;
+</failure>
+      </testcase>
+    </testsuite>
+    <testsuite name="jUnitTests.TwitterTest" time="0.0">
+      <testcase name="warning" classname="junit.framework.TestSuite.1" time="0.0">
+        <failure>junit.framework.AssertionFailedError: No tests found in jUnitTests.TwitterTest&#13;
+	at junit.framework.Assert.fail(Assert.java:47)&#13;
+	at junit.framework.TestSuite$1.runTest(TestSuite.java:90)&#13;
+	at junit.framework.TestCase.runBare(TestCase.java:130)&#13;
+	at junit.framework.TestResult$1.protect(TestResult.java:106)&#13;
+	at junit.framework.TestResult.runProtected(TestResult.java:124)&#13;
+	at junit.framework.TestResult.run(TestResult.java:109)&#13;
+	at junit.framework.TestCase.run(TestCase.java:120)&#13;
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)&#13;
+	at junit.framework.TestSuite.run(TestSuite.java:225)&#13;
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)&#13;
+	at junit.framework.TestSuite.run(TestSuite.java:225)&#13;
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:124)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:541)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:763)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:463)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:209)&#13;
+&#13;
+</failure>
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testrun>
