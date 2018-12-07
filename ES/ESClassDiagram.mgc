@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="BDA.AppFacebook" x="162" y="334">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="BDA.Interface_Grafica"
+            endpointName="gui" kind="Simple"/>
+    </Class>
+    <Class name="BDA.ReplyEmail" x="814" y="339">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="BDA.AppTwitter" x="617" y="282">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="BDA.Interface_Grafica"
+            endpointName="gui" kind="Simple"/>
+    </Class>
+    <Class name="BDA.CustomComparator" x="12" y="332">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="BDA.Interface_Grafica" x="353" y="-41">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="BDA.AppTwitter"
+            endpointName="twitter" kind="Simple"/>
+        <Association destinationClassName="BDA.AppFacebook"
+            endpointName="face" kind="Simple"/>
+        <Association destinationClassName="BDA.Mail"
+            endpointName="mailApp" kind="Simple"/>
+        <Communication destinationClassName="BDA.AppFacebook"/>
+        <Communication destinationClassName="BDA.AppTwitter"/>
+        <Communication destinationClassName="BDA.Mail"/>
+    </Class>
+    <Class name="BDA.Mail" x="810" y="108">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="BDA.Interface_Grafica"
+            endpointName="gui" kind="Simple"/>
+    </Class>
+</ClassDiagram>
