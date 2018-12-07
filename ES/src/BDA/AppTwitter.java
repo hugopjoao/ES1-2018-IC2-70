@@ -1,4 +1,5 @@
 package BDA;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -163,32 +164,19 @@ public class AppTwitter extends Thread {
 
 	public void pesquisa(String text) throws TwitterException {
 		gui.modelTwitter.removeAllElements();
-
-		if (text.isEmpty()) {
-			for (Status status : listaStatus) {
-				enviaTitulos(status);
+		List<Status> statuses = twitter1.getHomeTimeline();
+		if(!listaStatus.isEmpty())
+			listaStatus.removeAll(listaStatus);
+		for (Status s : statuses) {
+			if (s.getText().toLowerCase().contains(text.toLowerCase())) {
+				listaStatus.add(s);
 			}
 		}
 
-		else {
-			listaStatus.removeAll(listaStatus);
-
-			List<Status> statuses = twitter1.getHomeTimeline();
-
-			String palavraIsolada = " " + text + " ";
-
-			for (Status s : statuses) {
-				if (s.getText().toLowerCase().contains(palavraIsolada.toLowerCase())) {
-					listaStatus.add(s);
-				}
-			}
-
-			Collections.sort(listaStatus);
-			Collections.reverse(listaStatus);
-
-			for (Status status : listaStatus) {
-				enviaTitulos(status);
-			}
+		Collections.sort(listaStatus);
+		Collections.reverse(listaStatus);
+		for (Status status : listaStatus) {
+			enviaTitulos(status);
 		}
 
 	}

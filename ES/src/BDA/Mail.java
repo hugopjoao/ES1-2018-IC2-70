@@ -1,4 +1,5 @@
 package BDA;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -64,6 +65,7 @@ public class Mail extends Thread {
 			messages = inbox.getMessages();
 			for (Message m : messages) {
 				try {
+					System.out.println(m);
 					enviaTitulos(m);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -90,8 +92,8 @@ public class Mail extends Thread {
 	public String devolveTexto(int index) {
 
 		try {
-			String content;			
-			Message message = pesquisas.get(index);		
+			String content;
+			Message message = pesquisas.get(index);
 			content = convert(message);
 
 			return content;

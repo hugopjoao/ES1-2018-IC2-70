@@ -1,9 +1,9 @@
 package BDA;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -400,8 +400,7 @@ public class Interface_Grafica {
 				.createSequentialGroup().addGap(23)
 				.addComponent(scrollPaneMails, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(ComponentPlacement.RELATED, 1184, Short.MAX_VALUE)
-				.addGroup(g3_panel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(pesquisaMail)
+				.addGroup(g3_panel.createParallelGroup(Alignment.LEADING, false).addComponent(pesquisaMail)
 						.addComponent(scrollPaneMailEspecifico, GroupLayout.PREFERRED_SIZE, 212,
 								GroupLayout.PREFERRED_SIZE)
 						.addGroup(g3_panel.createSequentialGroup().addComponent(responder)
@@ -410,13 +409,13 @@ public class Interface_Grafica {
 				.addContainerGap()));
 		g3_panel.setVerticalGroup(g3_panel.createParallelGroup(Alignment.LEADING).addGroup(g3_panel
 				.createSequentialGroup().addContainerGap(707, Short.MAX_VALUE)
-				.addGroup(g3_panel.createParallelGroup(Alignment.LEADING).addGroup(g3_panel.createSequentialGroup()
-						.addComponent(pesquisaMail)
-						.addComponent(
-								scrollPaneMailEspecifico, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addGroup(g3_panel.createParallelGroup(Alignment.BASELINE).addComponent(responder)
-								.addComponent(encaminhar)))
+				.addGroup(g3_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(g3_panel.createSequentialGroup().addComponent(pesquisaMail)
+								.addComponent(scrollPaneMailEspecifico, GroupLayout.PREFERRED_SIZE, 142,
+										GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addGroup(g3_panel.createParallelGroup(Alignment.BASELINE).addComponent(responder)
+										.addComponent(encaminhar)))
 						.addComponent(scrollPaneMails, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE))
 				.addGap(286)));
 
