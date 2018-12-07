@@ -4,108 +4,108 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import com.restfb.exception.FacebookException;
-import facebook4j.Facebook;
-import facebook4j.FacebookFactory;
-import facebook4j.Post;
-import facebook4j.conf.ConfigurationBuilder;
+
+import com.restfb.Connection;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.FacebookClient.AccessToken;
+import com.restfb.Parameter;
+import com.restfb.types.FacebookType;
+import com.restfb.types.Post;
+import com.restfb.types.Thread;
+import com.restfb.types.User;
 
 public class AppFacebook extends Thread{
 
 	private Interface_Grafica gui;
 	private String accessToken;
-	private Facebook facebook;
+	private FacebookClient facebookClient;
 	public ArrayList <Post> listaPosts = new ArrayList <Post>();
 	
 	/* Access token:
-	 EAAMZCl2Ln2ZAkBAEof3X5g9YRoFpt6LpJqCW6fGITYFoHZCSz2MDbmaFtlFbMwkohrg0LZCkwrepdCA8ZAh20pYZBtYqCZAtrwr03ZCQeNZClgxmnUJewarsFBSjWPEKr13nUc2J9KJUZAQZB6CzIXFJeal3lFnzrorowCCtAixAS5M0wDZBvwDuyHTVlEJ2vcldzyoXCAG1ZBZCvX5rjrMEFtl35Phm5r9XUmL7wajRXSncBeTidvTCKW6rMA */
+	 EAAMZCl2Ln2ZAkBAOOClBI6wcfLKsnpGH19OvGbNA0YRVYy8114crcX6GTPW42O1fHQkzficIkcCvxL4h8Tf1hg6ZCWZAmyE1aAzz1dV71ImS2uZCMKdH40DZCChF0CpW9Wb1V4UIEZB0BKiTaMwcblVXmAVUFo6YMTWhdsP5mlZBztAsMORkrZBwDYDAu7Etobj64ZCd9exjSVTV24OKGZBsCZC93DkqQZBVnT6hLFWCpVTyJrQZDZD */
 	
-	/* https://www.facebook.com/Istar-Iul-1008842092466001/ 
-	 * https://www.facebook.com/ISCTEIUL/?ref=br_rs
-	 * https://www.facebook.com/ISCTEBusinessSchool/?ref=br_rs
+	
+	/**
+	 * Construtor da App do Facebook que recebe como argumentos um AccessToken e 
+	 * fazendo a associação a uma dada Interface Gráfica.
 	 */
 	
 	public AppFacebook (String accessToken, Interface_Grafica gui) {
-		this.accessToken = "EAAMZCl2Ln2ZAkBAOOClBI6wcfLKsnpGH19OvGbNA0YRVYy8114crcX6GTPW42O1fHQkzficIkcCvxL4h8Tf1hg6ZCWZAmyE1aAzz1dV71ImS2uZCMKdH40DZCChF0CpW9Wb1V4UIEZB0BKiTaMwcblVXmAVUFo6YMTWhdsP5mlZBztAsMORkrZBwDYDAu7Etobj64ZCd9exjSVTV24OKGZBsCZC93DkqQZBVnT6hLFWCpVTyJrQZDZD";
+		this.accessToken = "EAAMZCl2Ln2ZAkBAAmLMZCM6NWztZBwFEVRNVstRBsoEuxoRPwRtBkDW6l7ketjfnxEkbeWP4FvjtWY5M5MTWVE8C2i9maZA89dSBaB5gUHy67g0pFxRQnfjrNbQAE4jQCI9liqdmGl7ZBQiMDL1eycgBj3PjTkytX9JMw13OyGqcWvIN1RiTRRaOpOQWLgiAIZD";
 		this.gui = gui;
 	}
 	
 	/**
 	 *  Implementação do método run correspondente à Thread do Facebook que instancia um novo facebook com o Access Token recebido
-	 * anteriormente. Em seguida criará uma lista com os posts do utilizador para que depois possa filtrar por posts relacionados com o ISCTE.
-	 * Nesta filtragem, adiciona os posts relacionados com o ISCTE numa ArrayList, será organizado por ordem cronológica e impressa na GUI.
+	 * anteriormente. Em seguida criará uma lista com os posts do feed do utilizador e os imprimirá na GUI.
 	 * Caso não seja possível obter acesso com o Token utilizado, apresentará uma mensagem de erro.
 	 */
 	
 	public void run () {
-		configuracao();
-		feed();
 		
-	}
-	
-	public void configuracao() {
-		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true)
-		  .setOAuthAppId("")
-		  .setOAuthAccessToken("EAAMZCl2Ln2ZAkBAOOClBI6wcfLKsnpGH19OvGbNA0YRVYy8114crcX6GTPW42O1fHQkzficIkcCvxL4h8Tf1hg6ZCWZAmyE1aAzz1dV71ImS2uZCMKdH40DZCChF0CpW9Wb1V4UIEZB0BKiTaMwcblVXmAVUFo6YMTWhdsP5mlZBztAsMORkrZBwDYDAu7Etobj64ZCd9exjSVTV24OKGZBsCZC93DkqQZBVnT6hLFWCpVTyJrQZDZD");
-		FacebookFactory ff = new FacebookFactory(cb.build());
-		facebook = ff.getInstance();
-	}
-	
-	public void feed() {
-		gui.modelFacebook.removeAllElements();
-		listaPosts.removeAll(listaPosts);
+		FacebookClient fbClient = new DefaultFacebookClient(accessToken);
+		User me = fbClient.fetchObject("me", User.class);
 		
-		try {
-			listaPosts.addAll(facebook.searchPosts("iscte"));
-		} catch (facebook4j.FacebookException e) {
-			e.printStackTrace();
+		AccessToken extendedAcessToken = fbClient.obtainExtendedAccessToken("914344362105241", "306f085aeadb59d88313c12779850a9b");
+		
+		Connection<Post> result = fbClient.fetchConnection("me/feed",Post.class);
+		
+		for (List<Post> page : result) {
+			for (Post aPost : page)
+				if (aPost.getMessage() != null) {
+					listaPosts.add(aPost);
+				}
 		}
 	
-		
-		//Collections.sort(listaPosts, new CustomComparator());
-		
 		for (Post post : listaPosts) {
-			enviaPosts(post);
-		}
+	    	enviaPosts(post);
+	    } 
 		
 	}
 	
-	public void comment(String comentario, Post p) {
+	/**
+	 * Método Like que recebe um post (o que está apresentado na
+	 * Gui) e dá like no mesmo.
+	 */
+	
+	public void like (Post p) {
+		
 		String postId = p.getId();
 		
-		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true)
-		  .setOAuthAccessToken("EAAMZCl2Ln2ZAkBAOOClBI6wcfLKsnpGH19OvGbNA0YRVYy8114crcX6GTPW42O1fHQkzficIkcCvxL4h8Tf1hg6ZCWZAmyE1aAzz1dV71ImS2uZCMKdH40DZCChF0CpW9Wb1V4UIEZB0BKiTaMwcblVXmAVUFo6YMTWhdsP5mlZBztAsMORkrZBwDYDAu7Etobj64ZCd9exjSVTV24OKGZBsCZC93DkqQZBVnT6hLFWCpVTyJrQZDZD");
-		FacebookFactory ff = new FacebookFactory(cb.build());
-		facebook = ff.getInstance();
+		DefaultFacebookClient client = new DefaultFacebookClient(accessToken);
+		client.publish(postId+"/likes", Boolean.class); 
 		
-		try {
-			facebook.commentPost(postId, comentario);
-		} catch (facebook4j.FacebookException e) {
-			e.printStackTrace();
-		}
 	}
+	
+	/**
+	 * Método partilhar (utilizado através de um actionListener da GUI
+	 * que permitiria dar share do post que está em exibição
+	 * através da instanciação do método publish da API utilizada.
+	 */
+	
+	public void partilhar(Post p) {
 		
-		
-		
-	public void like(Post p) {
 		String postId = p.getId();
 		
-		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true).setOAuthAccessToken("EAAMZCl2Ln2ZAkBAOOClBI6wcfLKsnpGH19OvGbNA0YRVYy8114crcX6GTPW42O1fHQkzficIkcCvxL4h8Tf1hg6ZCWZAmyE1aAzz1dV71ImS2uZCMKdH40DZCChF0CpW9Wb1V4UIEZB0BKiTaMwcblVXmAVUFo6YMTWhdsP5mlZBztAsMORkrZBwDYDAu7Etobj64ZCd9exjSVTV24OKGZBsCZC93DkqQZBVnT6hLFWCpVTyJrQZDZD");
-		FacebookFactory ff = new FacebookFactory(cb.build());
-		facebook = ff.getInstance();
-			try {
-				facebook.likePost(postId);
-			} catch (facebook4j.FacebookException e) {
-				e.printStackTrace();
-			}
+		DefaultFacebookClient client = new DefaultFacebookClient(accessToken);
+		client.publish("me/feed", FacebookType.class, Parameter.with("link", postId));
+		
 	}
+	
+	/**
+	 * Implementação do método enviaPosts que recebe um Post e envia para a Gui
+	 * o Id do Post e a data em que foi criado.
+	 */
 	
 	private void enviaPosts(Post p) {
-		gui.modelFacebook.addElement(p.getName() + " || " + p.getCreatedTime());
+		gui.modelFacebook.addElement(p.getId() + " || " + p.getCreatedTime());
 	}
+	
+	/**
+	 * Implementação de um método que recebe um indíce sob a forma de um inteiro, e
+	 * devolve da lista de Status, o status correspondente ao índice.
+	 */
 	
 	public Post getIndex(int index) {
 		return listaPosts.get(index);

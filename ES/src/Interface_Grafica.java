@@ -345,12 +345,12 @@ public class Interface_Grafica {
 			}
 		});
 
-		comentar.addActionListener(new ActionListener() {
+		/*comentar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String texto = JOptionPane.showInputDialog("Please insert your Comment");
 				face.comment(texto, face.getIndex(indiceFace));				
 			}
-		});
+		}); */
 		
 		likeFace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
