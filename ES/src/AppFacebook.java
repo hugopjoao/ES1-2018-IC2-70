@@ -32,7 +32,7 @@ public class AppFacebook extends Thread{
 	 */
 	
 	public AppFacebook (String accessToken, Interface_Grafica gui) {
-		this.accessToken = "EAAMZCl2Ln2ZAkBAAmLMZCM6NWztZBwFEVRNVstRBsoEuxoRPwRtBkDW6l7ketjfnxEkbeWP4FvjtWY5M5MTWVE8C2i9maZA89dSBaB5gUHy67g0pFxRQnfjrNbQAE4jQCI9liqdmGl7ZBQiMDL1eycgBj3PjTkytX9JMw13OyGqcWvIN1RiTRRaOpOQWLgiAIZD";
+		this.accessToken = "EAAMZCl2Ln2ZAkBAFQEnKOR1nLdPleQa1HrZC5z3lZBYiyLfZBEZCmjt9timCqeSZAjKOn8HZCUkqYwqx3Kxb34niwJ9EWbVDAMKTM5opjsSiJJ8mRSmNI8ZAunXscFcfJELOwyrkTpTCkkCWcV1EsZAB277KFZARi6EZAD5zNiekCPKUIocFKyZBT1qTJ6Xz6EWDsIxyMgAIB2SgG3wBlscMs9vAjnRyb4mTZAA1nzNM7rdt9O3QZDZD";
 		this.gui = gui;
 	}
 	
@@ -104,7 +104,7 @@ public class AppFacebook extends Thread{
 	
 	/**
 	 * Implementação de um método que recebe um indíce sob a forma de um inteiro, e
-	 * devolve da lista de Status, o status correspondente ao índice.
+	 * devolve da lista de Posts, o Post correspondente ao índice.
 	 */
 	
 	public Post getIndex(int index) {
@@ -113,11 +113,11 @@ public class AppFacebook extends Thread{
 
 	/**
 	 * Implementação de um método que recebe um indíce sob a forma de um inteiro, e
-	 * imprime na Gui o status correspondente ao obtido no método getIndex(index).
+	 * imprime na Gui o post correspondente ao obtido no método getIndex(index).
 	 */
 
 	public void imprimeIndex(int index) {
-		gui.postAtual.setText(getIndex(index).getCaption());
+		gui.postAtual.setText(getIndex(index).getMessage());
 	}
 	
 }

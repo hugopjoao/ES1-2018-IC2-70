@@ -318,7 +318,7 @@ public class Interface_Grafica {
 		 GroupLayout g2_panel = new GroupLayout(panel_1);
 			g2_panel.setHorizontalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
 					.createSequentialGroup().addGap(23)
-					.addComponent(listaPosts, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrollPaneFace, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 1184, Short.MAX_VALUE)
 					.addGroup(g2_panel.createParallelGroup(Alignment.LEADING, false)
 							.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
@@ -332,7 +332,7 @@ public class Interface_Grafica {
 							.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE).addGap(18)
 							.addGroup(g2_panel.createParallelGroup(Alignment.BASELINE).addComponent(likeFace)
 									.addComponent(comentar)))
-							.addComponent(listaPosts, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE))
+							.addComponent(scrollPaneFace, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE))
 					.addGap(286)));
 
 		listaPosts.addMouseListener(new MouseAdapter() {
