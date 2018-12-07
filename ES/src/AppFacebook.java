@@ -1,10 +1,5 @@
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -19,20 +14,25 @@ public class AppFacebook extends Thread{
 
 	private Interface_Grafica gui;
 	private String accessToken;
+	private String appId;
+	private String appSecret;
 	private FacebookClient facebookClient;
 	public ArrayList <Post> listaPosts = new ArrayList <Post>();
 	
-	/* Access token:
-	 EAAMZCl2Ln2ZAkBAOOClBI6wcfLKsnpGH19OvGbNA0YRVYy8114crcX6GTPW42O1fHQkzficIkcCvxL4h8Tf1hg6ZCWZAmyE1aAzz1dV71ImS2uZCMKdH40DZCChF0CpW9Wb1V4UIEZB0BKiTaMwcblVXmAVUFo6YMTWhdsP5mlZBztAsMORkrZBwDYDAu7Etobj64ZCd9exjSVTV24OKGZBsCZC93DkqQZBVnT6hLFWCpVTyJrQZDZD */
-	
+//	Access token:
+//	 accessToken = EAAMZCl2Ln2ZAkBAOOClBI6wcfLKsnpGH19OvGbNA0YRVYy8114crcX6GTPW42O1fHQkzficIkcCvxL4h8Tf1hg6ZCWZAmyE1aAzz1dV71ImS2uZCMKdH40DZCChF0CpW9Wb1V4UIEZB0BKiTaMwcblVXmAVUFo6YMTWhdsP5mlZBztAsMORkrZBwDYDAu7Etobj64ZCd9exjSVTV24OKGZBsCZC93DkqQZBVnT6hLFWCpVTyJrQZDZD */
+//	 appId = "914344362105241";
+//	 appSecret = "306f085aeadb59d88313c12779850a9b"
 	
 	/**
 	 * Construtor da App do Facebook que recebe como argumentos um AccessToken e 
 	 * fazendo a associação a uma dada Interface Gráfica.
 	 */
 	
-	public AppFacebook (String accessToken, Interface_Grafica gui) {
-		this.accessToken = "EAAMZCl2Ln2ZAkBAFQEnKOR1nLdPleQa1HrZC5z3lZBYiyLfZBEZCmjt9timCqeSZAjKOn8HZCUkqYwqx3Kxb34niwJ9EWbVDAMKTM5opjsSiJJ8mRSmNI8ZAunXscFcfJELOwyrkTpTCkkCWcV1EsZAB277KFZARi6EZAD5zNiekCPKUIocFKyZBT1qTJ6Xz6EWDsIxyMgAIB2SgG3wBlscMs9vAjnRyb4mTZAA1nzNM7rdt9O3QZDZD";
+	public AppFacebook (String accessToken,String appId, String appSecret, Interface_Grafica gui) {
+		this.accessToken = accessToken;
+		this.appId = appId;
+		this.appSecret = appSecret;
 		this.gui = gui;
 	}
 	
@@ -47,7 +47,7 @@ public class AppFacebook extends Thread{
 		FacebookClient fbClient = new DefaultFacebookClient(accessToken);
 		User me = fbClient.fetchObject("me", User.class);
 		
-		AccessToken extendedAcessToken = fbClient.obtainExtendedAccessToken("914344362105241", "306f085aeadb59d88313c12779850a9b");
+		AccessToken extendedAcessToken = fbClient.obtainExtendedAccessToken(appId, appSecret);
 		
 		Connection<Post> result = fbClient.fetchConnection("me/feed",Post.class);
 		

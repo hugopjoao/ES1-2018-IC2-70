@@ -21,11 +21,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
-import com.restfb.exception.FacebookException;
-
 import twitter4j.TwitterException;
-
 import javax.swing.JButton;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -62,13 +58,13 @@ public class Interface_Grafica {
 	private JScrollPane scrollPaneFace = new JScrollPane();
 	private JScrollPane scrollPaneFacePost = new JScrollPane();
 	private int indiceFace;
-	private JTextField comentarioFacebook = new JTextField();
 
 	private Mail mailApp;
 	JTextPane mail = new JTextPane();
 	private JScrollPane scrollPaneMails = new JScrollPane();
 	private JScrollPane scrollPaneMailEspecifico = new JScrollPane();
 	private int indiceMail;
+	private JTextField pesquisaMail = new JTextField();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -185,7 +181,9 @@ public class Interface_Grafica {
 
 	public void botaoLoginFace() {
 		String accessToken = JOptionPane.showInputDialog("Please insert your Access Token");
-		AppFacebook face = new AppFacebook(accessToken, this);
+		String appId = JOptionPane.showInputDialog("Please insert your App ID");
+		String appSecret = JOptionPane.showInputDialog("Please insert your App Secret");
+		AppFacebook face = new AppFacebook(accessToken, appId, appSecret, this);
 		this.face = face;
 		face.run();
 		iniciaFace();
@@ -225,7 +223,8 @@ public class Interface_Grafica {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
-					twitter.pesquisa(pesquisaTwitter.getText());
+					if (!pesquisaTwitter.getText().isEmpty())
+						twitter.pesquisa(pesquisaTwitter.getText());
 				} catch (TwitterException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -308,32 +307,32 @@ public class Interface_Grafica {
 		ImageIcon likeFaceImagem = new ImageIcon(this.getClass().getResource("LikeFacebook.jpg"));
 		likeFaceImagem.setImage(getScaledImage(likeFaceImagem.getImage(), 35, 35));
 		likeFace.setIcon(likeFaceImagem);
-		
-		 JButton comentar = new JButton(); 
-		 ImageIcon comentarFace = new ImageIcon(this.getClass().getResource("CommentFacebook.png"));
-		 comentarFace.setImage(getScaledImage(comentarFace.getImage(), 35, 35));
-		 comentar.setIcon(comentarFace);
-		 
 
-		 GroupLayout g2_panel = new GroupLayout(panel_1);
-			g2_panel.setHorizontalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
-					.createSequentialGroup().addGap(23)
-					.addComponent(scrollPaneFace, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 1184, Short.MAX_VALUE)
-					.addGroup(g2_panel.createParallelGroup(Alignment.LEADING, false)
-							.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-							.addGroup(g2_panel.createSequentialGroup().addComponent(likeFace)
-									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(comentar)))
-					.addContainerGap()));
-			g2_panel.setVerticalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
-					.createSequentialGroup().addContainerGap(707, Short.MAX_VALUE)
-					.addGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel.createSequentialGroup()
-							.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE).addGap(18)
-							.addGroup(g2_panel.createParallelGroup(Alignment.BASELINE).addComponent(likeFace)
-									.addComponent(comentar)))
-							.addComponent(scrollPaneFace, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE))
-					.addGap(286)));
+		JButton comentar = new JButton();
+		ImageIcon comentarFace = new ImageIcon(this.getClass().getResource("CommentFacebook.png"));
+		comentarFace.setImage(getScaledImage(comentarFace.getImage(), 35, 35));
+		comentar.setIcon(comentarFace);
+
+		GroupLayout g2_panel = new GroupLayout(panel_1);
+		g2_panel.setHorizontalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
+				.createSequentialGroup().addGap(23)
+				.addComponent(scrollPaneFace, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED, 1184, Short.MAX_VALUE)
+				.addGroup(g2_panel.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+						.addGroup(g2_panel.createSequentialGroup().addComponent(likeFace)
+								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(comentar)))
+				.addContainerGap()));
+		g2_panel.setVerticalGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel
+				.createSequentialGroup().addContainerGap(707, Short.MAX_VALUE)
+				.addGroup(g2_panel.createParallelGroup(Alignment.LEADING).addGroup(g2_panel.createSequentialGroup()
+						.addComponent(scrollPaneFacePost, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+						.addGap(18)
+						.addGroup(g2_panel.createParallelGroup(Alignment.BASELINE).addComponent(likeFace)
+								.addComponent(comentar)))
+						.addComponent(scrollPaneFace, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE))
+				.addGap(286)));
 
 		listaPosts.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
@@ -345,13 +344,13 @@ public class Interface_Grafica {
 			}
 		});
 
-		/*comentar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String texto = JOptionPane.showInputDialog("Please insert your Comment");
-				face.comment(texto, face.getIndex(indiceFace));				
-			}
-		}); */
-		
+		/*
+		 * comentar.addActionListener(new ActionListener() { public void
+		 * actionPerformed(ActionEvent e) { String texto =
+		 * JOptionPane.showInputDialog("Please insert your Comment");
+		 * face.comment(texto, face.getIndex(indiceFace)); } });
+		 */
+
 		likeFace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				face.like(face.getIndex(indiceFace));
@@ -378,6 +377,14 @@ public class Interface_Grafica {
 		scrollPaneMails.setViewportView(listaMails);
 		scrollPaneMailEspecifico.setViewportView(mail);
 
+		pesquisaMail.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				if (!pesquisaMail.getText().isEmpty())
+					mailApp.pesquisa(pesquisaMail.getText());
+			}
+		});
+
 		JButton responder = new JButton();
 		ImageIcon mailResponderImagem = new ImageIcon(this.getClass().getResource("ResponderMail.png"));
 		mailResponderImagem.setImage(getScaledImage(mailResponderImagem.getImage(), 35, 35));
@@ -393,6 +400,7 @@ public class Interface_Grafica {
 				.addComponent(scrollPaneMails, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(ComponentPlacement.RELATED, 1184, Short.MAX_VALUE)
 				.addGroup(g3_panel.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(pesquisaMail)
 						.addComponent(scrollPaneMailEspecifico, GroupLayout.PREFERRED_SIZE, 212,
 								GroupLayout.PREFERRED_SIZE)
 						.addGroup(g3_panel.createSequentialGroup().addComponent(responder)
@@ -402,6 +410,7 @@ public class Interface_Grafica {
 		g3_panel.setVerticalGroup(g3_panel.createParallelGroup(Alignment.LEADING).addGroup(g3_panel
 				.createSequentialGroup().addContainerGap(707, Short.MAX_VALUE)
 				.addGroup(g3_panel.createParallelGroup(Alignment.LEADING).addGroup(g3_panel.createSequentialGroup()
+						.addComponent(pesquisaMail)
 						.addComponent(
 								scrollPaneMailEspecifico, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
 						.addGap(18)
@@ -450,8 +459,7 @@ public class Interface_Grafica {
 				String destinatario = JOptionPane.showInputDialog("Please insert destination email");
 				try {
 					ReplyEmail responder = new ReplyEmail(mailApp.username, mailApp.password, destinatario,
-							mailApp.messages[indiceMail].getSubject(),
-							mailApp.devolveTexto(indiceMail));
+							mailApp.messages[indiceMail].getSubject(), mailApp.devolveTexto(indiceMail));
 					responder.run();
 				} catch (MessagingException e1) {
 					// TODO Auto-generated catch block

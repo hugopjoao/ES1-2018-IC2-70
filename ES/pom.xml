@@ -29,11 +29,6 @@
   		<artifactId>twitter4j-core</artifactId>
   		<version>4.0.7</version>
   	</dependency>
-  	<dependency>
-  		<groupId>org.facebook4j</groupId>
-  		<artifactId>facebook4j-core</artifactId>
-  		<version>[2.4,)</version>
-	</dependency>
   	<!-- https://mvnrepository.com/artifact/com.restfb/restfb -->
 	<dependency>
     	<groupId>com.restfb</groupId>
@@ -49,6 +44,11 @@
   		<groupId>org.apache.maven.plugins</groupId>
   		<artifactId>maven-compiler-plugin</artifactId>
   		<version>3.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.jsoup</groupId>
+  		<artifactId>jsoup</artifactId>
+  		<version>1.11.3</version>
   	</dependency>
   </dependencies>
 </project>
