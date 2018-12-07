@@ -27,6 +27,7 @@ public class AppFacebook extends Thread{
 	
 	
 	/**
+	 * 
 	 * Construtor da App do Facebook que recebe como argumentos um AccessToken e 
 	 * fazendo a associação a uma dada Interface Gráfica.
 	 */
@@ -65,6 +66,7 @@ public class AppFacebook extends Thread{
 	}
 	
 	/**
+	 * 
 	 * Método Like que recebe um post (o que está apresentado na
 	 * Gui) e dá like no mesmo.
 	 */
@@ -79,6 +81,7 @@ public class AppFacebook extends Thread{
 	}
 	
 	/**
+	 * 
 	 * Método partilhar (utilizado através de um actionListener da GUI
 	 * que permitiria dar share do post que está em exibição
 	 * através da instanciação do método publish da API utilizada.
@@ -94,6 +97,7 @@ public class AppFacebook extends Thread{
 	}
 	
 	/**
+	 * 
 	 * Implementação do método enviaPosts que recebe um Post e envia para a Gui
 	 * o Id do Post e a data em que foi criado.
 	 */
@@ -103,6 +107,7 @@ public class AppFacebook extends Thread{
 	}
 	
 	/**
+	 * 
 	 * Implementação de um método que recebe um indíce sob a forma de um inteiro, e
 	 * devolve da lista de Posts, o Post correspondente ao índice.
 	 */
@@ -112,6 +117,7 @@ public class AppFacebook extends Thread{
 	}
 
 	/**
+	 * 
 	 * Implementação de um método que recebe um indíce sob a forma de um inteiro, e
 	 * imprime na Gui o post correspondente ao obtido no método getIndex(index).
 	 */
