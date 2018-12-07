@@ -21,7 +21,7 @@ public class AppFacebook extends Thread{
 	public ArrayList <Post> listaPosts = new ArrayList <Post>();
 	
 //	Access token:
-//	 accessToken = EAAMZCl2Ln2ZAkBAOOClBI6wcfLKsnpGH19OvGbNA0YRVYy8114crcX6GTPW42O1fHQkzficIkcCvxL4h8Tf1hg6ZCWZAmyE1aAzz1dV71ImS2uZCMKdH40DZCChF0CpW9Wb1V4UIEZB0BKiTaMwcblVXmAVUFo6YMTWhdsP5mlZBztAsMORkrZBwDYDAu7Etobj64ZCd9exjSVTV24OKGZBsCZC93DkqQZBVnT6hLFWCpVTyJrQZDZD */
+//	 accessToken = EAAMZCl2Ln2ZAkBABBhZCCMuq8Q3iKKsZBVNlZBpGnFcrNIPX8hnY9Rt8LRUCv93QyhwZA3iPOIMkZAud2g4w8RPaqgXZBN7HDDcvKzKC1hX7eOv1WmdiFGUFaOhuVaIhVpehZBGJqNnEWPvIqGdi7tnC9V2ZCpvwK2VXp6ZBurZBDXMEauwtP3d8YDRahcnCKZCUeRhtKzEGtbi3lF5eMWxkzF4J2jJq2d9PrEzm6sR1Iq9vGCgZDZD */
 //	 appId = "914344362105241";
 //	 appSecret = "306f085aeadb59d88313c12779850a9b"
 	
