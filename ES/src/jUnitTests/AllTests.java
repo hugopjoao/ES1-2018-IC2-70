@@ -1,3 +1,4 @@
+package jUnitTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

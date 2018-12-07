@@ -1,8 +1,11 @@
+package jUnitTests;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import com.restfb.Facebook;
+
+import BDA.Interface_Grafica;
 
 public class FacebookTest {
 

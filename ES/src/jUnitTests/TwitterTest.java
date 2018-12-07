@@ -1,4 +1,8 @@
+package jUnitTests;
 import com.restfb.Facebook;
+
+import BDA.AppTwitter;
+import BDA.Interface_Grafica;
 
 public class TwitterTest {
 
